@@ -10,6 +10,11 @@ export default defineConfig({
         }),
         react(),
     ],
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+        },
+    },
     optimizeDeps: {
         force: true,
         esbuildOptions: {

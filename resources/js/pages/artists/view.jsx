@@ -24,14 +24,11 @@ import {
     IconCloudUpload,
     IconClock,
 } from "@tabler/icons-react";
-import { Link } from "@inertiajs/react";
 import { useAtom } from "jotai";
-import { popupAtom } from "@/utils/index";
 import FormBody from "@/shared/products/form-body";
 
 const View = (props) => {
     const { data, processing } = props;
-    const [isOpen, setIsOpen] = useAtom(popupAtom);
 
     console.log("🦄 page:", props);
 

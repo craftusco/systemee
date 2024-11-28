@@ -6,12 +6,10 @@ import { Link, usePage } from "@inertiajs/react";
 
 import { IconAlertCircle, IconCloudUpload, IconEye } from "@tabler/icons-react";
 import { useAtom } from "jotai";
-import { popupAtom } from "@/utils/index";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 
 const Products = (props) => {
-    const [isOpen, setIsOpen] = useAtom(popupAtom);
     const { data, filters, processing } = props;
     console.log("🌱 page:", props);
     const [reload, setReload] = useState(null);

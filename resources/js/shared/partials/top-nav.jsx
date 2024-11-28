@@ -82,7 +82,7 @@ const TopNav = (props) => {
                         <Divider type="vertical" />
                         <div className="block">
                             <Text className="block w-100">
-                                {user?.first_name}
+                                {user?.name}
                             </Text>
                         </div>
                         <IconChevronDown color="#A1A8B0" />

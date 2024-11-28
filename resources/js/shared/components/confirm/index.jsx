@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ConfirmModal from './confirm-modal';
 import { ConfigProvider } from 'antd';
-import theme from '@/assets/theme.json';
+//import theme from '../assets/theme.json';
 
 const confirm = (props) => {
   return new Promise((resolve) => {
@@ -14,7 +14,7 @@ const confirm = (props) => {
       resolve(result);
     };
     root.render(
-      <ConfigProvider theme={theme}>
+      <ConfigProvider>
         <ConfirmModal {...props} onClose={handleResolve} />
       </ConfigProvider>
     );

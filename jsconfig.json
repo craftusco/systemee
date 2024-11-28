@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-  "baseUrl": "./resources/js/",
-  "paths": {
-      "@/assets/*": ["../assets/*"],
+    "jsx": "react",
+    "baseUrl": "./resources/js",
+    "paths": {
+      "@/assets/*": ["/../assets/*"], 
       "@/shared/*": ["shared/*"],
-      "@/components/*": ["shared/components/*"],
       "@/pages/*": ["pages/*"],
       "@/lib/*": ["lib/*"],
       "@/layouts/*": ["layouts/*"],
+      "@/data/*": ["data/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/utils/*": ["utils/*"]
-      }
+      "@/helpers/*": ["helpers/*"],
+      "@/components/*": ["shared/components/*"],
+      "@/utils/*": ["utils/*"],
+      "@/store/*": ["store/*"]
+    }
   }
 }
