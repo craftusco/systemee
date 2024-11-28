@@ -6,7 +6,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 import { IconAlertCircle, IconCloudUpload, IconEye } from "@tabler/icons-react";
 import { useAtom } from "jotai";
-import { popupAtom } from "@/store/index";
+import { popupAtom } from "@/utils/index";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 

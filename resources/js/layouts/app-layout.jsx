@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Layout } from 'antd';
 const { Header, Sider, Content, Footer } = Layout;
 import SideNav from '@/shared/partials/side-nav';
+import TopNav from '@/shared/partials/top-nav';
 
 export default function AppLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -28,6 +29,9 @@ export default function AppLayout({ children }) {
         <SideNav />
       </Sider>
       <Layout style={{padding: '6px 0', marginLeft: 240}}>
+        <Header>
+          <TopNav />
+        </Header>
         <Content theme='light'>
           <div className="container">{children}</div>
           </Content>

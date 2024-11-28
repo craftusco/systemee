@@ -1,91 +1,96 @@
-import React from "react";
-import { Link, router } from "@inertiajs/react"
+"use client";
+import { Avatar, Button, Divider, Dropdown, Flex, Typography } from "antd";
+const { Text } = Typography;
+import { useAtom } from "jotai";
+
 import {
-  IconAlertCircle,
-  IconChevronDown,
-  IconChevronLeft,
-  IconChevronRight
-} from "@tabler/icons-react"
-import { Menu, Space, Avatar, Modal, Button } from "antd"
+    IconChevronDown,
+    IconLogout,
+    IconMenu2,
+    IconUserCircle,
+} from "@tabler/icons-react";
+import { Link, useForm, usePage } from "@inertiajs/react";
+import confirm from "@/shared/components/confirm";
+import { useDevice } from "@/utils/breakpoints";
+import { sidebarAtom } from "@/utils/index";
 
-const TopNav = ({ collapsed, setCollapsed }) => {
-  const confirm = Modal.confirm;
+const TopNav = (props) => {
+    const { post, errors } = useForm();
+    const { isLoggedIn, user } = usePage().props.auth;
+    const breakpoints = useDevice();
+    const [isSidebarOpen, openSidebar] = useAtom(sidebarAtom);
 
-  /* Logout Action */
-  const handleLogout = () => {
-    Modal.confirm({
-      title: "Are you sure you want to go out?",
-      icon: <IconAlertCircle />,
-      transitionName: "ant-modal-slide-up",
-      content:
-        "You are logging out of the Adspire platform, are you sure you want to proceed?",
-      okText: "Sign Out",
-      okType: "danger",
-      cancelText: "Cancel"
-      //   onOk() {
-      //     logoutAction()
-      //       .then((data) => {
-      //         message.success("Logged out successfully.");
-      //         router.push("/login");
-      //       })
-      //       .catch((error) => {
-      //         console.log(error);
-      //         message.error("Error logging out. Please try again.");
-      //       });
-      //   }
-    })
-  }
+    const handleLogout = async () => {
+        return confirm({
+            title: "Sei sicuro di voler effettuare il logout?",
+            message: "Stai uscendo dall'app, sei sicuro di voler procedere?",
+            cancelText: "Annulla",
+            confirmText: "Esci",
+            isDanger: true,
+            icon: <IconLogout color="#fff" />,
+            async onOk() {
+                post("/logout");
+            },
+        });
+    };
 
-  const mainMenu = [
-    {
-      key: "account",
-      label: (
-        <Space>
-          <Avatar size="small" name="USER" />
-          <span className="flex flex-col">User admin</span>
-          <IconChevronDown size="18" />
-        </Space>
-      ),
-      children: [
+    const items = [
         {
-          key: "profile",
-          label: <Link href="/profile">Profile</Link>
+            key: "profile",
+            icon: <IconUserCircle className="text-primary" />,
+            label: <Link href="/admin/profile">Il mio profilo</Link>,
         },
         {
-          type: "divider"
+            type: "divider",
         },
         {
-          key: "logout",
-          danger: true,
-          label: (
-            <Link href="#" onClick={handleLogout}>
-              Logout
-            </Link>
-          )
-        }
-      ]
-    }
-  ]
+            key: "logout",
+            danger: true,
 
-  return (
-    <div className="flex items-center justify-between border-b border-gray-200 w-full">
-      <div>
-        <Button
-          type="text"
-          icon={collapsed ? <IconChevronRight /> : <IconChevronLeft />}
-          onClick={() => setCollapsed(!collapsed)}
-        />
-      </div>
-      <div className="w-1/3 flex items-center">
-        <Menu
-          triggerSubMenuAction="click"
-          mode="horizontal"
-          theme="light"
-          items={mainMenu}
-          className="bg-transparent right-0"
-        />
-      </div>
-    </div>
-  )
-}
+            onClick: () => handleLogout(),
+            icon: <IconLogout className="text-red" />,
+            label: "Logout",
+        },
+    ];
+
+    return (
+        <Flex
+            justify={!breakpoints.md ? "space-between" : "end"}
+            align="center"
+            className="h-full"
+        >
+            <Button
+                type="text"
+                className="!hidden !md:block"
+                icon={<IconMenu2 />}
+                onClick={() => openSidebar(!isSidebarOpen)}
+            />
+            <div className="float-right">
+                <Dropdown
+                    className="min-w-full"
+                    trigger={["click"]}
+                    placement="bottomRight"
+                    menu={{
+                        items,
+                    }}
+                >
+                    <div className="flex items-center cursor-pointer h-full">
+                        <Avatar
+                            shape="square"
+                            icon={<IconUserCircle className="text-primary" />}
+                        />
+                        <Divider type="vertical" />
+                        <div className="block">
+                            <Text className="block w-100">
+                                {user?.first_name}
+                            </Text>
+                        </div>
+                        <IconChevronDown color="#A1A8B0" />
+                    </div>
+                </Dropdown>
+            </div>
+        </Flex>
+    );
+};
+
 export default TopNav;

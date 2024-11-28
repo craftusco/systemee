@@ -14,7 +14,7 @@ export default defineConfig({
         force: true,
         esbuildOptions: {
             loader: {
-                '.js': 'jsx', // Use 'jsx' loader for .js files
+                '.js': 'jsx', 
             },
         },
     },

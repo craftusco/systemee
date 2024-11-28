@@ -2,7 +2,8 @@
   "theme": "light",
   "token": {
     "fontFamily": "'Inter', sans-serif",
-    "colorPrimary": "#199A8E",     
+    "colorPrimary": "#199A8E",    
+    "wirefreame": false, 
     "colorLink": "#199A8E",
     "colorSuccess": "#34C759",     
     "colorWarning": "#FF9500",     

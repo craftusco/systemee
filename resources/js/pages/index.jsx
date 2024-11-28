@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Statistic } from "antd";
+import { Row, Col, Card, Statistic, List } from "antd";
 import PageActions from "@/shared/components/page-actions";
-import {
-    IconBox,
-    IconClock,
-    IconUsersGroup,
-} from "@tabler/icons-react";
+import { IconBox, IconClock, IconUsersGroup } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
 import AppLayout from "@/layouts/app-layout";
 
@@ -59,6 +55,31 @@ const Index = (props) => {
                             </Card>
                         </Col>
                     ))}
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col
+                        span={6}
+                        xl={6}
+                        lg={6}
+                        md={6}
+                        sm={24}
+                        xs={24}
+                        key="calendar"
+                    >
+                        <Card title="Calendario">
+                            <List
+                                bordered
+                                dataSource={data?.calendar}
+                                renderItem={(item) => (
+                                    <List.Item>
+                                        <Link href={item.url}>
+                                            {item.title}
+                                        </Link>
+                                    </List.Item>
+                                )}
+                            />
+                        </Card>
+                    </Col>
                 </Row>
             </div>
         </AppLayout>

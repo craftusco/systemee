@@ -26,7 +26,7 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
 import { useAtom } from "jotai";
-import { popupAtom } from "@/store/index";
+import { popupAtom } from "@/utils/index";
 import FormBody from "@/shared/products/form-body";
 
 const View = (props) => {

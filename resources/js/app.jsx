@@ -1,17 +1,15 @@
 import { createInertiaApp } from "@inertiajs/react";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import AppLayout from "./layouts/app-layout.jsx";
+import "../assets/styles/app.css";
 import { ConfigProvider } from "antd";
 import theme from "../assets/theme.json";
 import dayjs from "dayjs";
 import 'dayjs/locale/it';
 import it_IT from 'antd/locale/it_IT';
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const appName = import.meta.env.VITE_APP_NAME;
 
-const queryClient = new QueryClient();
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -30,9 +28,7 @@ createInertiaApp({
         const root = createRoot(el);
         root.render(
             <ConfigProvider theme={theme} locale={it_IT}>
-                <QueryClientProvider client={queryClient}>
                     <App {...props} />
-                </QueryClientProvider>
             </ConfigProvider>
         );
     }
