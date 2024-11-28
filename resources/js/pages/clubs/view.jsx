@@ -24,7 +24,7 @@ import Datatable from "@/shared/datatable";
 import { productColumns } from "@/shared/products/columns";
 
 const View = (props) => {
-    const { data, isLoading } = props;
+    const { data, processing } = props;
     const { products } = data;
     const [selected, setSelected] = useState(null);
     const [reload, setReload] = useState(null);
@@ -160,7 +160,7 @@ const View = (props) => {
                         columns={productColumns}
                         exportData={true}
                         fetchData={products}
-                        loading={isLoading}
+                        loading={processing}
                         watchStates={[reload]}
                         pagination={{
                             pageSize: 50,

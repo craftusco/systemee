@@ -27,11 +27,10 @@ import {
 import { Link } from "@inertiajs/react";
 import { useAtom } from "jotai";
 import { popupAtom } from "@/store/index";
-import PopupSync from "@/shared/products/popup-sync";
 import FormBody from "@/shared/products/form-body";
 
 const View = (props) => {
-    const { data, isLoading } = props;
+    const { data, processing } = props;
     const [isOpen, setIsOpen] = useAtom(popupAtom);
 
     console.log("🦄 page:", props);
@@ -63,13 +62,6 @@ const View = (props) => {
 
     return (
         <>
-            {isOpen && (
-                <PopupSync
-                    opened={isOpen}
-                    data={data}
-                    toggle={() => setIsOpen(false)}
-                />
-            )}
             <div className="page">
                 <PageActions
                     backUrl="/products"

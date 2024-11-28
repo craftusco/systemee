@@ -1,41 +1,117 @@
 {
   "theme": "light",
   "token": {
-    "colorPrimary": "#2271B1",
-    "colorError": "#e20004",
-    "borderRadius": 8,
-    "wireframe": true,
-    "fontSize": ".8125rem",
-    "controlHeight": 28,         
-    "colorTextDisabled": "rgba(0, 0, 0, 0.65)",
-    "controlOutline": 0
+    "fontFamily": "'Inter', sans-serif",
+    "colorPrimary": "#199A8E",     
+    "colorLink": "#199A8E",
+    "colorSuccess": "#34C759",     
+    "colorWarning": "#FF9500",     
+    "colorError": "#FE5C5C",       
+    "colorText": "#222",        
+    "colorBgBase": "#fff",  
+    "borderRadius": 12,            
+    "fontSize": 16,                 
+    "controlHeight": 36,       
+    "paddingContentHorizontal": 16,
+    "paddingContentVertical": 10,
+    "motionDurationMid": "0.15s"
   },
   "components": {
+    "Typography": {
+      "fontSizeHeading1": 30,
+      "fontSizeHeading2": 26,
+      "fontSizeHeading3": 20,
+      "fontSizeHeading4": 18,
+      "fontSizeHeading5": 16,
+      "marginXS": 0,
+      "marginXXS": 0,
+      "titleMarginBottom": 0,
+      "titleMarginTop": 0
+    },
+    "Button": {
+      "colorLink": "#174a47",
+      "bgDanger": "#e11719",
+      "controlOutline": 0
+    },
+    "Statistic": {
+      "contentFontSize": 22
+    },
+     "Collapse": {
+      "headerBg": "#fff"
+    },
+    "Avatar": {
+      "colorTextPlaceholder": "#E8F3F1",
+      "borderRadius": 12
+    }, 
     "Layout": {
-      "lightSiderBg": "#fff",
-      "headerBg": "#fff",
       "bodyBg": "#fff",
-      "headerHeight": 56
+      "siderBg": "#f9f9f9",
+      "lightSiderBg": "#f9f9f9",
+      "headerHeight": 50,
+      "footerPadding": 2,
+      "headerBg": "#fff",
+      "headerPadding": "0 8px",
+      "footerBg": "#fff"
     },
     "Card": {
-      "colorBorderSecondary": "rgba(0, 0, 0, 0.15)",
-      "boxShadow": 0,
-      "boxShadowTertiary": "none"
+      "colorBorderSecondary": "#d9d9d9",
+      "padding": 12,
+      "paddingLG": 12,
+      "boxShadow": "none"
     },
     "Table": {
-      "headerBg": "#fff",
+      "headerBg": "transparent",
       "padding": 6
     },
     "Divider": {
-      "colorSplit": "rgb(0 0 0 / 15%)"
-    }, 
-    "Typography": {
-      "titleMarginTop": "0"
-    },
-    "Menu":{
-      "headerPadding": "0px",
       "colorSplit": "rgb(0 0 0 / 15%)",
-      "bgColor": "#fff"
+      "marginLG": 12
+    },
+    "Form": {
+      "itemMarginBottom": 20,
+      "labelColonMarginInlineEnd": 4,
+      "fontSizeLG": 18
+    },
+    "Radio": {
+      "controlHeight": 20
+    },
+    "Select": {
+      "colorBgContainer": "#fff"
+    },
+    "Input": {
+      "boxShadow": "none",
+      "colorBgContainer": "#F9FAFB"
+    }, 
+    "DatePicker": {
+      "colorBgContainer": "#F9FAFB"
+    }, 
+    "TimePicker": {
+      "colorBgContainer": "#F9FAFB"
+    },
+    "Dropdown": {
+      "dropdownWidth": 300,
+      "padding": 0,
+      "boxShadowSecondary": "0 0px 6px 1px rgba(0, 0, 0, 0.08)"
+    },
+    "Menu": {
+      "itemActiveBg": "#174a47",
+      "itemActiveColor": "#fff",
+      "lineWidth": 0,
+      "lineHeight": 0,
+      "margin": 2,
+      "lineWidthFocus": 0,
+      "dropdownWidth": 200,
+      "fontSize": 15,
+      "activeBarBorderWidth": 0,
+      "itemHeight": 36,
+      "inlineIndent": 2,
+      "itemPaddingInline": 2,
+      "itemMarginInline": 4,
+      "itemMarginBlock": 4,
+      "iconMarginInlineEnd": 8,
+      "itemBg": "transparent",
+      "iconSize": 20,
+      "collapsedIconSize": 20
     }
   }
 }

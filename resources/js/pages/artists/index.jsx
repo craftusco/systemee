@@ -7,13 +7,12 @@ import { Link, usePage } from "@inertiajs/react";
 import { IconAlertCircle, IconCloudUpload, IconEye } from "@tabler/icons-react";
 import { useAtom } from "jotai";
 import { popupAtom } from "@/store/index";
-import PopupSync from "@/shared/products/popup-sync";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 
 const Products = (props) => {
     const [isOpen, setIsOpen] = useAtom(popupAtom);
-    const { data, filters, isLoading } = props;
+    const { data, filters, processing } = props;
     console.log("🌱 page:", props);
     const [reload, setReload] = useState(null);
     const [showAlert, toggleAlert] = useState(true);
@@ -117,13 +116,7 @@ const Products = (props) => {
 
     return (
         <>
-            {isOpen && (
-                <PopupSync
-                    opened={isOpen}
-                    data={selected}
-                    toggle={() => setIsOpen(false)}
-                />
-            )}
+
             <div className="data">
                 <PageActions
                     title={`Prodotti (${data?.data?.pagination?.total})`}
@@ -150,7 +143,7 @@ const Products = (props) => {
                     <Datatable
                         columns={columns}
                         data={data}
-                        isLoading={isLoading}
+                        processing={processing}
                         initialFilters={filters}
                         rowSelection={rowSelection}
                     />

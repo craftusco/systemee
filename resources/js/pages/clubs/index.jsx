@@ -9,8 +9,8 @@ import {
 import Datatable from "@/shared/datatable";
 
 const Suppliers = (props) => {
-    const { data, isLoading } = props;
-    //const [isLoading, setIsLoading] = useState(true);
+    const { data, processing } = props;
+    //const [processing, setIsLoading] = useState(true);
     console.log("🦄 page", props);
 
     const columns = [

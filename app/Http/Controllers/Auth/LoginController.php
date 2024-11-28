@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,11 +17,7 @@ class LoginController extends Controller
 
     public function page(): Response
     {
-        // if(Auth::check()){
-        //     return Inertia::render('index');
-        // }else{
-            return Inertia::render('auth/login');
-
+        return Inertia::render('auth/login');
     }
 
     public function login(LoginRequest $request): RedirectResponse
@@ -33,7 +30,7 @@ class LoginController extends Controller
         }
 
         // If authentication fails, log an error and redirect back with an error message
-        \Log::error('Login failed. Invalid credentials provided.');
+        Log::error('Login failed. Invalid credentials provided.');
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

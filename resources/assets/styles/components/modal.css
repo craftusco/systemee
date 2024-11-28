@@ -57,49 +57,30 @@
 }
 
 .ant-modal .ant-modal-close,
-.ant-drawer-close{
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #fafafa !important;
-  right: 14px;
-  top: 14px;
-  font-size: 14px;
+.ant-drawer-close {
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
 }
 
-
-
-.modal-fullscreen {
-  width: 90%;
-  height: 90%;
-  min-height: 90%;
-  overflow: hidden;
-  .ant-modal-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 100%;
-    overflow: hidden;
-    .ant-modal-body {
-      overflow: auto;
-      height: 100%;
-    }
-   
-  }
-
-  &.p-0 .ant-modal-body {
-    padding: 0px !important;
-   }
-  & .ant-modal-body{
-    overflow-y: scroll;
-    position: relative;
-  }
+.ant-modal:not(.confirm-modal) .ant-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-@media (max-width: 1280px) {
-  .modal-fullscreen {
+.ant-modal:not(.confirm-modal) .ant-modal-body {
+  flex: 1;
+  overflow: scroll;
+}
+
+@media (max-width: 767px) {
+  .ant-modal:not(.confirm-modal) {
     width: 100% !important;
     height: 100% !important;
   }
-}
 
+  .ant-modal:not(.confirm-modal) .ant-modal-content {
+    height: calc(100dvh - 16px) !important;
+  }
+}

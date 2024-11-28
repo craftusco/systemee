@@ -1,7 +1,7 @@
 import { createInertiaApp } from "@inertiajs/react";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import "../assets/app.css";
+import "../assets/styles/app.css";
 import AppLayout from "./layouts/app-layout.jsx";
 import { ConfigProvider } from "antd";
 import theme from "../assets/theme.json";
