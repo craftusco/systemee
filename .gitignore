@@ -1,6 +1,9 @@
 /.phpunit.cache
 /node_modules
 /vendor
+.env
+.env.production
+.env.local
 .phpactor.json
 .phpunit.result.cache
 Homestead.json
