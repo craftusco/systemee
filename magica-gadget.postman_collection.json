@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "f183d32a-c146-42bd-af32-1d1276f3ac57",
+		"name": "magica-gadget",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5580700"
+	},
+	"item": [
+		{
+			"name": "makito",
+			"item": [
+				{
+					"name": "api",
+					"item": []
+				},
+				{
+					"name": "products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlMakito}}/products?limit=10",
+							"host": [
+								"{{urlMakito}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/makito/download",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"makito",
+								"download"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlMakito}}/categories?lang=it_IT",
+							"host": [
+								"{{urlMakito}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "it_IT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response body",
+									"var response = pm.response.json();",
+									"",
+									"pm.collectionVariables.set(\"makitoToken\", response.msg);",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"magica@magicagadget.it\",\n    \"password\": \"Mk2472319to\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlMakito}}/login",
+							"host": [
+								"{{urlMakito}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{makitoToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "pf",
+			"item": [
+				{
+					"name": "products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://wsa.pfconcept.com/test/RestGateway/",
+							"protocol": "https",
+							"host": [
+								"wsa",
+								"pfconcept",
+								"com"
+							],
+							"path": [
+								"test",
+								"RestGateway",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "feed",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "makito - products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/makito",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"makito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pf - products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/pf",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"pf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "makito - categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/makito/categories",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"makito",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "xd",
+			"item": [
+				{
+					"name": "api",
+					"item": [
+						{
+							"name": "products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/api/xd/products",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"xd",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "prices",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/api/xd/prices",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"xd",
+										"prices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "urlMakito",
+			"value": "https://data.makito.es/api"
+		},
+		{
+			"key": "urlApp",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "makitoToken",
+			"value": "."
+		},
+		{
+			"key": "localhost",
+			"value": "https://api.magica.test"
+		},
+		{
+			"key": "urlPF",
+			"value": "https://wsa.pfconcept.com/test/RestGateway"
+		},
+		{
+			"key": "urlXD",
+			"value": "https://wsa.pfconcept.com/test/RestGateway",
+			"type": "string"
+		},
+		{
+			"key": "urlWoocommerce",
+			"value": "https://wordpress-1325122-4845929.cloudwaysapps.com/wp-json/wc/v3",
+			"type": "string"
+		}
+	]
+}

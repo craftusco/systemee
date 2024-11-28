@@ -1,0 +1,41 @@
+{
+  "theme": "light",
+  "token": {
+    "colorPrimary": "#2271B1",
+    "colorError": "#e20004",
+    "borderRadius": 8,
+    "wireframe": true,
+    "fontSize": 14,
+    "controlHeight": 32,         
+    "colorTextDisabled": "rgba(0, 0, 0, 0.65)",
+    "controlOutline": 0
+  },
+  "components": {
+    "Layout": {
+      "lightSiderBg": "#fff",
+      "headerBg": "#fff",
+      "bodyBg": "#fff",
+      "headerHeight": 56
+    },
+    "Card": {
+      "colorBorderSecondary": "rgba(0, 0, 0, 0.15)",
+      "boxShadow": 0,
+      "boxShadowTertiary": "none"
+    },
+    "Table": {
+      "headerBg": "#fff",
+      "padding": 6
+    },
+    "Divider": {
+      "colorSplit": "rgb(0 0 0 / 15%)"
+    }, 
+    "Typography": {
+      "titleMarginTop": "0"
+    },
+    "Menu":{
+      "headerPadding": "0px",
+      "colorSplit": "rgb(0 0 0 / 15%)",
+      "bgColor": "#fff"
+    }
+  }
+}
