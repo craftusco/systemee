@@ -111,7 +111,7 @@ const View = (props) => {
     return (
         <div className="page">
             <PageActions
-                backUrl="/suppliers"
+                backUrl="/clubs"
                 title={
                     <>
                         {" "}

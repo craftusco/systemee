@@ -7,13 +7,13 @@ const Toolbar = () => {
 
     const navLinks = [
         {
-            key: "/suppliers/[id]",
-            label: <Link href={`/suppliers${id}`}>Details</Link>,
+            key: "/clubs/[id]",
+            label: <Link href={`/clubs${id}`}>Details</Link>,
         },
         {
-            key: "/suppliers/[id]/categories",
+            key: "/clubs/[id]/categories",
             label: (
-                <Link href={`/suppliers${id}/rows`}>
+                <Link href={`/clubs${id}/rows`}>
                     Item Rows
                 </Link>
             ),

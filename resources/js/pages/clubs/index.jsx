@@ -8,10 +8,10 @@ import {
 } from "@tabler/icons-react";
 import Datatable from "@/shared/datatable";
 
-const Suppliers = (props) => {
+const Clubs = (props) => {
     const { data, processing } = props;
     //const [processing, setIsLoading] = useState(true);
-    console.log("🦄 page", props);
+    console.log("🌱 page:", props);
 
     const columns = [
         {
@@ -20,7 +20,7 @@ const Suppliers = (props) => {
             sortable: true,
             filterSearch: true,
             render: (record) => (
-                <Link href={`/suppliers/${record?.id}`}>
+                <Link href={`/clubs/${record?.id}`}>
                     <Space>
                         <Avatar src={record?.logo}/>
                         {record?.name}
@@ -56,7 +56,7 @@ const Suppliers = (props) => {
             align: "right",
             render: (record) => (
                 <Space.Compact>
-                    <Link href={`/suppliers/${record?.id}`}>
+                    <Link href={`/clubs/${record?.id}`}>
                         <Button icon={<IconEye />}>Vedi</Button>
                     </Link>
                 </Space.Compact>
@@ -71,7 +71,7 @@ const Suppliers = (props) => {
             <Datatable
                         columns={columns}
                         data={data.items}  
-                        endpoint="/suppliers" 
+                        endpoint="/clubs" 
                         filters={data.filters} 
                         pagination={data.pagination}
                     />
@@ -80,4 +80,4 @@ const Suppliers = (props) => {
     );
 };
 
-export default Suppliers;
+export default Clubs;

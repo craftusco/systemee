@@ -9,9 +9,8 @@
     "colorError": "#FE5C5C",       
     "colorText": "#222",        
     "colorBgBase": "#fff",  
-    "borderRadius": 12,            
-    "fontSize": 16,                 
-    "controlHeight": 36,       
+    "borderRadius": 8,            
+    "fontSize": 13,                      
     "paddingContentHorizontal": 16,
     "paddingContentVertical": 10,
     "motionDurationMid": "0.15s"
@@ -34,7 +33,7 @@
       "controlOutline": 0
     },
     "Statistic": {
-      "contentFontSize": 22
+      "contentFontSize": 16
     },
      "Collapse": {
       "headerBg": "#fff"
@@ -69,8 +68,7 @@
     },
     "Form": {
       "itemMarginBottom": 20,
-      "labelColonMarginInlineEnd": 4,
-      "fontSizeLG": 18
+      "labelColonMarginInlineEnd": 4
     },
     "Radio": {
       "controlHeight": 20
@@ -101,14 +99,13 @@
       "margin": 2,
       "lineWidthFocus": 0,
       "dropdownWidth": 200,
-      "fontSize": 15,
       "activeBarBorderWidth": 0,
-      "itemHeight": 36,
+      "itemHeight": 28,
       "inlineIndent": 2,
       "itemPaddingInline": 2,
       "itemMarginInline": 4,
-      "itemMarginBlock": 4,
-      "iconMarginInlineEnd": 8,
+      "itemMarginBlock": 0,
+      "iconMarginInlineEnd": 4,
       "itemBg": "transparent",
       "iconSize": 20,
       "collapsedIconSize": 20

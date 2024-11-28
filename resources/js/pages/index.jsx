@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Button, Avatar, Typography, Statistic } from "antd";
-const { Text, Title } = Typography;
-const { Meta } = Card;
+import { Row, Col, Card, Statistic } from "antd";
 import PageActions from "@/shared/components/page-actions";
 import {
-    Icon123,
-    IconApps,
     IconBox,
     IconClock,
-    IconUserFilled,
     IconUsersGroup,
 } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
+import AppLayout from "@/layouts/app-layout";
 
 const Index = (props) => {
     const { data } = props;
-    console.log("Index props", props);
+    console.log("🌱 page:", props);
     const navLinks = [
         {
             label: "Tot. Prodotti",
@@ -27,7 +23,7 @@ const Index = (props) => {
             label: "Tot. Fornitori",
             value: data?.total_suppliers || 0,
             icon: <IconUsersGroup />,
-            url: "/suppliers",
+            url: "/clubs",
         },
         {
             label: "Ultima sincronizzazione",
@@ -38,7 +34,7 @@ const Index = (props) => {
     ];
 
     return (
-        <div className="page">
+        <AppLayout title="Home">
             <PageActions title="Dashboard" />
             <div className="page-content">
                 <Row gutter={[16, 16]}>
@@ -65,7 +61,7 @@ const Index = (props) => {
                     ))}
                 </Row>
             </div>
-        </div>
+        </AppLayout>
     );
 };
 

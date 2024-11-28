@@ -67,7 +67,7 @@ const Products = (props) => {
             key: "supplier.name",
             render: (record) => (
                 <Link
-                    href={`/suppliers/${record?.supplier?.id}`}
+                    href={`/clubs/${record?.supplier?.id}`}
                     target="_blank"
                 >
                     <Space>

@@ -1,7 +1,6 @@
 import { createInertiaApp } from "@inertiajs/react";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import "../assets/styles/app.css";
 import AppLayout from "./layouts/app-layout.jsx";
 import { ConfigProvider } from "antd";
 import theme from "../assets/theme.json";
@@ -24,7 +23,7 @@ createInertiaApp({
         const pages = import.meta.glob('./pages/**/*.jsx', { eager: true })
         let page = pages[`./pages/${name}.jsx`]
         //console.log({page})
-        page.default.layout = page?.default?.layout || (page => <AppLayout children={page} />)
+        //page.default.layout = page?.default?.layout || (page => <AppLayout children={page} />)
         return page
     },
     setup({ el, App, props }) {
