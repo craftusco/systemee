@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ClubController;
 use App\Http\Controllers\HomeController;
 
 
@@ -32,5 +34,21 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('artists')->name('artists')->group(function () {
         Route::get('/', [ArtistController::class, 'index'])->name('index');
         Route::get('/{slug}', [ArtistController::class, 'view'])->name('view');
+    }); 
+    // Artists
+    Route::prefix('clubs')->name('clubs')->group(function () {
+        Route::get('/', [ClubController::class, 'index'])->name('index');
+        Route::get('/{slug}', [ClubController::class, 'view'])->name('view');
+    }); 
+    // Calendar
+    Route::prefix('calendar')->name('artists')->group(function () {
+        Route::get('/', [CalendarController::class, 'page'])->name('index');
+        Route::get('/list', [CalendarController::class, 'list'])->name('list');
     });
+
+    // Settings
+    Route::prefix('settings')->name('settings')->group(function () {
+        Route::get('/', [ArtistController::class, 'index'])->name('index');
+        Route::get('/{slug}', [ArtistController::class, 'view'])->name('view');
+    }); 
 });

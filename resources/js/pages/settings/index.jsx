@@ -5,7 +5,7 @@ import { IconBox, IconClock, IconUsersGroup } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
 import AppLayout from "@/layouts/app-layout";
 
-const PageIndex = (props) => {
+const PageSettings = (props) => {
     const { data } = props;
     console.log("🌱 page:", props);
     const navLinks = [
@@ -86,4 +86,4 @@ const PageIndex = (props) => {
     );
 };
 
-export default PageIndex;
+export default PageSettings;

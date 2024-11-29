@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button, Space, Table } from "antd";
+import { Avatar, Button, Divider, Space, Table } from "antd";
 import PageActions from "@/shared/components/page-actions";
 import { Link } from "@inertiajs/react";
 import { dateTimeFormatter } from "@/helpers/formatter";
@@ -7,9 +7,10 @@ import {
     IconEye,
 } from "@tabler/icons-react";
 import Datatable from "@/shared/datatable";
+import AppLayout from "@/layouts/app-layout";
 
 const Clubs = (props) => {
-    const { data, processing } = props;
+    const { data, filters, processing } = props;
     //const [processing, setIsLoading] = useState(true);
     console.log("🌱 page:", props);
 
@@ -21,9 +22,13 @@ const Clubs = (props) => {
             filterSearch: true,
             render: (record) => (
                 <Link href={`/clubs/${record?.id}`}>
-                    <Space>
-                        <Avatar src={record?.logo}/>
-                        {record?.name}
+                    <Space split={<Divider type="vertical" />}>
+                        <Avatar
+                            size="large"
+                            shape="square"
+                            src={record?.iamge || "/images/placeholder.svg"}
+                        />
+                        <span>{record?.name}</span>
                     </Space>
                 </Link>
             ),
@@ -43,7 +48,7 @@ const Clubs = (props) => {
             ),
         },
         {
-            title: "Tot. prodotti",
+            title: "Tot. Artisti",
             key: "total_products",
             dataIndex: "total_products",
             align: "right",
@@ -65,18 +70,17 @@ const Clubs = (props) => {
     ];
 
     return (
-        <div className="page">
-            <PageActions title={`Fornitori (${data?.pagination?.total})`} />
+        <AppLayout>
+            <PageActions title={`Club (${data?.total})`} />
             <div className="page-content">
             <Datatable
                         columns={columns}
-                        data={data.items}  
-                        endpoint="/clubs" 
-                        filters={data.filters} 
-                        pagination={data.pagination}
+                        data={data}
+                        processing={processing}
+                        initialFilters={filters}
                     />
             </div>
-        </div>
+        </AppLayout>
     );
 };
 

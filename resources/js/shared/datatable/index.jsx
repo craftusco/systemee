@@ -1,20 +1,19 @@
 import React, { useState, useCallback } from "react";
-import { Table, Input } from "antd";
+import { Table, Button, Popover, Checkbox } from "antd";
 import { router } from "@inertiajs/react";
 
-const Datatable = ({ columns, data, initialFilters, ...props }) => {
-    const [filters, setFilters] = useState(initialFilters.filter || {});
+const Datatable = ({ columns, data, initialFilters = null, ...props }) => {
+    const [filters, setFilters] = useState(initialFilters?.filter || {});
     const [debounceTimeout, setDebounceTimeout] = useState(null);
-
-    console.log("filters:", filters);
+    const [visible, setVisible] = useState(false);
 
     const { current_page, per_page, total, data: rows } = data;
 
-    const handleInputChange = (value, key) => {
-        if (debounceTimeout) clearTimeout(debounceTimeout);
-
+    const handleFilterChange = (key, value) => {
         const newFilters = { ...filters, [key]: value };
         setFilters(newFilters);
+
+        if (debounceTimeout) clearTimeout(debounceTimeout);
 
         const timeout = setTimeout(() => {
             router.get(window.location.href, {
@@ -22,7 +21,7 @@ const Datatable = ({ columns, data, initialFilters, ...props }) => {
                 page: current_page,
                 page_size: per_page,
             });
-        }, 500);
+        }, 1000);
 
         setDebounceTimeout(timeout);
     };
@@ -37,41 +36,54 @@ const Datatable = ({ columns, data, initialFilters, ...props }) => {
                 page_size: pageSize,
             });
         },
-        [filters] // Only recreate the function when filters change
+        [filters]
     );
 
-    const modifiedColumns = columns.map((col) => ({
-        ...col,
-        title: col.filterable ? (
-            <>
-                {col.title}
-                <Input
-                    placeholder={`Search ${col.title}`}
-                    value={filters[col.key] || null}
-                    allowClear
-                    onChange={(e) => handleInputChange(e.target.value, col.key)}
-                />
-            </>
-        ) : (
-            col.title
-        ),
-    }));
+    const content = (
+        <div>
+            {columns.map((col) =>
+                col.filterable ? (
+                    <div key={col.key} style={{ marginBottom: 8 }}>
+                        <Checkbox
+                            checked={!!filters[col.key]}
+                            onChange={(e) => handleFilterChange(col.key, e.target.checked ? "value" : null)} // Customize the value as needed
+                        >
+                            {col.title}
+                        </Checkbox>
+                    </div>
+                ) : null
+            )}
+        </div>
+    );
 
     return (
-        <Table
-            columns={modifiedColumns}
-            dataSource={rows || []}
-            rowKey="id"
-            pagination={{
-                hideOnSinglePage: true,
-                position: ["bottomCenter"],
-                current: current_page,
-                total: total,
-                pageSize: per_page,
-            }}
-            onChange={handleTableChange}
-            {...props}
-        />
+        <div style={{ position: "relative" }}>
+            <div style={{ textAlign: "right", marginBottom: 16 }}>
+                <Popover
+                    content={content}
+                    title="Filters"
+                    trigger="click"
+                    visible={visible}
+                    onVisibleChange={setVisible}
+                >
+                    <Button type="primary">Filters</Button>
+                </Popover>
+            </div>
+            <Table
+                columns={columns}
+                dataSource={rows || []}
+                rowKey="id"
+                pagination={{
+                    hideOnSinglePage: true,
+                    position: ["bottomCenter"],
+                    current: current_page,
+                    total: total,
+                    pageSize: per_page,
+                }}
+                onChange={handleTableChange}
+                {...props}
+            />
+        </div>
     );
 };
 

@@ -20,8 +20,8 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
 import { dateTimeFormatter } from "@/helpers/formatter";
-import Datatable from "@/shared/datatable";
-import { productColumns } from "@/shared/products/columns";
+import AppLayout from "@/layouts/app-layout";
+
 
 const View = (props) => {
     const { data, processing } = props;
@@ -38,7 +38,7 @@ const View = (props) => {
             key: "name",
             sorter: (a, b) => a.name - b.name,
             render: (record) => (
-                <Link href={`/products/${record?.id}`}>
+                <Link href={`/artists/${record?.id}`}>
                     <Space>
                         <Avatar
                             size="large"
@@ -64,7 +64,7 @@ const View = (props) => {
             align: "right",
             render: (record) => (
                 <Space.Compact>
-                    <Link href={`/products/${record?.name}`}>
+                    <Link href={`/artists/${record?.name}`}>
                         <Button icon={<IconEye />}>Visualizza</Button>
                     </Link>
                     <Button
@@ -80,10 +80,10 @@ const View = (props) => {
 
     const navLinks = [
         {
-            label: "Tot. Prodotti",
+            label: "Tot. Artisti",
             value: data?.total_products || 0,
             icon: <IconBox />,
-            url: "/products",
+            url: "/artists",
         },
         {
             label: "Ultima sincronizzazione",
@@ -109,7 +109,7 @@ const View = (props) => {
     };
 
     return (
-        <div className="page">
+        <AppLayout>
             <PageActions
                 backUrl="/clubs"
                 title={
@@ -151,24 +151,9 @@ const View = (props) => {
                         </Col>
                     ))}
                 </Row>
-                <Title level={4}>Prodotti</Title>
-                <Datatable
-                        rowSelection={{
-                            type: "checkbox",
-                            ...rowSelection,
-                        }}
-                        columns={productColumns}
-                        exportData={true}
-                        fetchData={products}
-                        loading={processing}
-                        watchStates={[reload]}
-                        pagination={{
-                            pageSize: 50,
-                        }}
-                        rowKey={(record) => record.id}
-                    />
+               
             </div>
-        </div>
+            </AppLayout>
     );
 };
 

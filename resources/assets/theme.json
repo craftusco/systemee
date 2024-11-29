@@ -2,16 +2,15 @@
   "theme": "light",
   "token": {
     "fontFamily": "'Inter', sans-serif",
-    "colorPrimary": "#199A8E",    
+    "colorPrimary": "#d62828",    
     "wirefreame": false, 
-    "colorLink": "#199A8E",
+    "colorLink": "#d62828",
     "colorSuccess": "#34C759",     
     "colorWarning": "#FF9500",     
     "colorError": "#FE5C5C",       
     "colorText": "#222",        
     "colorBgBase": "#fff",  
-    "borderRadius": 8,            
-    "fontSize": 13,                      
+    "borderRadius": 8,                            
     "paddingContentHorizontal": 16,
     "paddingContentVertical": 10,
     "motionDurationMid": "0.15s"
@@ -39,9 +38,6 @@
      "Collapse": {
       "headerBg": "#fff"
     },
-    "Avatar": {
-      "colorTextPlaceholder": "#E8F3F1"
-    }, 
     "Layout": {
       "bodyBg": "#fff",
       "siderBg": "#f9f9f9",
@@ -105,7 +101,8 @@
       "itemMarginBlock": 2,
       "iconMarginInlineEnd": 2,
       "iconSize": 18,
-      "collapsedIconSize": 18
+      "collapsedIconSize": 18,
+      "itemBg": "transparent"
     }
   }
 }

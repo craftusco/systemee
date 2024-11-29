@@ -10,6 +10,7 @@ import {
     Tag,
     Statistic,
     Space,
+    Dropdown,
 } from "antd";
 const { Text, Title } = Typography;
 const { Meta } = Card;
@@ -23,9 +24,12 @@ import {
     IconUpload,
     IconCloudUpload,
     IconClock,
+    IconDots,
+    IconTrash,
 } from "@tabler/icons-react";
 import { useAtom } from "jotai";
-import FormBody from "@/shared/products/form-body";
+import FormBody from "@/shared/artists/form-body";
+import AppLayout from "@/layouts/app-layout";
 
 const View = (props) => {
     const { data, processing } = props;
@@ -57,28 +61,49 @@ const View = (props) => {
         { label: "Data di Modifica", value: data?.date_modified }, // Data di modifica
     ];
 
+    const tableActions = [
+        {
+          onClick: () => setModal(!modal),
+          label: "Modifica",
+        },
+        {
+          type: "divider",
+        },
+        {
+          key: 2,
+          danger: true,
+          icon: <IconTrash />,
+          disabled: true,
+          label: "Elimina",
+          // onClick: async () => {
+          //   if (selected?.user_id) {
+          //     handleDelete(selected?.user_id);
+          //   } else {
+          //     console.error('documentId is undefined');
+          //   }
+          // },
+        },
+      ];
+
     return (
-        <>
-            <div className="page">
+        <AppLayout>
                 <PageActions
-                    backUrl="/products"
-                    title={
-                        <>
-                            {" "}
-                            Dettagli prodotto - <mark>{data?.name}</mark>
-                        </>
-                    }
+                    backUrl="/artists"
+                    title={`Artista - ${data?.name}`}
                     subTitle={`Fornitore - ${data?.supplier?.name}`}
-                    extra={[
+                    extra={
                         <Space>
-                            <Button
-                                icon={<IconCloudUpload />}
-                                onClick={setIsOpen}
-                            >
-                                Sincronizza
+                          <Dropdown
+                            menu={{ items: tableActions }}
+                            placement="bottomRight"
+                            trigger={["click"]}
+                          >
+                            <Button icon={<IconDots />} type="text">
+                              Altro
                             </Button>
-                        </Space>,
-                    ]}
+                          </Dropdown>
+                        </Space>
+                      }
                 />
                 <div className="page-content">
                     <Row gutter={[16, 16]}>
@@ -102,8 +127,7 @@ const View = (props) => {
                         </Col>
                     </Row>
                 </div>
-            </div>
-        </>
+        </AppLayout>
     );
 };
 

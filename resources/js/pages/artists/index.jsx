@@ -1,37 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Avatar, Button, Popover, Space, Typography } from "antd";
+import { Alert, Avatar, Button, Divider, Popover, Space, Typography } from "antd";
 const { Text } = Typography;
 import PageActions from "@/shared/components/page-actions";
 import { Link, usePage } from "@inertiajs/react";
 
 import { IconAlertCircle, IconCloudUpload, IconEye } from "@tabler/icons-react";
-import { useAtom } from "jotai";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
+import AppLayout from "@/layouts/app-layout";
 
 const Products = (props) => {
     const { data, filters, processing } = props;
     console.log("🌱 page:", props);
-    const [reload, setReload] = useState(null);
-    const [showAlert, toggleAlert] = useState(true);
     const [selected, setSelected] = useState([]);
     // Toggle popup
     const togglePopup = (record = null) => {
         setSelected(record);
         setIsOpen(!isOpen);
-    };
-
-    // rowSelection object indicates the need for row selection
-    const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            setSelected(selectedRowKeys);
-
-            console.log(
-                `selectedRowKeys: ${selectedRowKeys}`,
-                "selectedRows: ",
-                selectedRows
-            );
-        },
     };
 
     const columns = [
@@ -41,14 +26,14 @@ const Products = (props) => {
             filterable: true,
             sorter: (a, b) => a.name - b.name,
             render: (record) => (
-                <Link href={`/products/${record?.id}`}>
-                    <Space>
+                <Link href={`/artists/${record?.id}`}>
+                    <Space split={<Divider type="vertical" />}>
                         <Avatar
                             size="large"
                             shape="square"
                             src={record?.iamge || "/images/placeholder.svg"}
                         />
-                        {record?.name}
+                        <span>{record?.name}</span>
                     </Space>
                 </Link>
             ),
@@ -58,22 +43,6 @@ const Products = (props) => {
             filterable: true,
             key: "sku",
             dataIndex: "sku",
-        },
-        {
-            title: "Fornitore",
-            filterable: true,
-            key: "supplier.name",
-            render: (record) => (
-                <Link
-                    href={`/clubs/${record?.supplier?.id}`}
-                    target="_blank"
-                >
-                    <Space>
-                        <Avatar src={record?.supplier?.logo} />
-                        {record?.supplier?.name}
-                    </Space>
-                </Link>
-            ),
         },
         {
             title: "Categoria",
@@ -100,7 +69,7 @@ const Products = (props) => {
             align: "right",
             render: (record) => (
                 <Space.Compact>
-                    <Link href={`/products/${record?.id}`}>
+                    <Link href={`/artists/${record?.id}`}>
                         <Button icon={<IconEye />} />
                     </Link>
                     <Button
@@ -113,29 +82,20 @@ const Products = (props) => {
     ];
 
     return (
-        <>
-
+        <AppLayout title="Artisti">
             <div className="data">
                 <PageActions
-                    title={`Prodotti (${data?.data?.pagination?.total})`}
+                    title={`Artisti (${data?.total})`}
                     extra={
                         <Button
                             type="primary"
-                            disabled={selected?.length === 0}
                             icon={<IconCloudUpload />}
                             onClick={() => togglePopup()}
                         >
-                            Carica
+                            Aggiungi
                         </Button>
                     }
                 >
-                    <Alert
-                        showIcon
-                        closable
-                        type="info"
-                        message="Prodotti scaricati dai vari fornitori"
-                        description="Prodotti scaricati dai vari fornitori"
-                    />
                 </PageActions>
                 <div className="data-content">
                     <Datatable
@@ -143,11 +103,11 @@ const Products = (props) => {
                         data={data}
                         processing={processing}
                         initialFilters={filters}
-                        rowSelection={rowSelection}
+    
                     />
                 </div>
             </div>
-        </>
+        </AppLayout>
     );
 };
 

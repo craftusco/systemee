@@ -1,5 +1,8 @@
 @layer tailwind-base, antd;
 
+/* Import your modal components or other styles first */
+@import './components/modal';
+
 @layer tailwind-base {
   @tailwind base;
 }
@@ -7,12 +10,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './components/modal';
 
-html,
-body {
-  letter-spacing: 0.02rem;
-}
 
 mark, .ant-typography mark {
   background: #E8F3F1 !important;

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +13,50 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $faker = Faker::create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Seed Artists
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('artists')->insert([
+                'name' => $faker->name,
+                'genre' => $faker->word,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        // Seed Clubs
+        for ($i = 0; $i < 5; $i++) {
+            DB::table('clubs')->insert([
+                'name' => $faker->company . ' Club',
+                'location' => $faker->address,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        // Seed Events and associate with multiple artists
+        for ($i = 0; $i < 15; $i++) {
+            $eventId = DB::table('events')->insertGetId([
+                'title' => $faker->sentence,
+                'start_time' => $faker->dateTimeBetween('+1 days', '+10 days'),
+                'end_time' => $faker->dateTimeBetween('+11 days', '+20 days'),
+                'club_id' => $faker->numberBetween(1, 5),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Associate the event with 1-3 random artists
+            $artistIds = range(1, 10);
+            shuffle($artistIds);
+            foreach (array_slice($artistIds, 0, rand(1, 3)) as $artistId) {
+                DB::table('event_artist')->insert([
+                    'event_id' => $eventId,
+                    'artist_id' => $artistId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }
