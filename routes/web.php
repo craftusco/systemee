@@ -13,7 +13,8 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\RequestController;
+use App\Http\Controllers\SettingsController;
 
 // Auth
 Route::middleware('guest')->group(function () {
@@ -33,22 +34,27 @@ Route::middleware(['auth'])->group(function () {
     // Artists
     Route::prefix('artists')->name('artists')->group(function () {
         Route::get('/', [ArtistController::class, 'index'])->name('index');
-        Route::get('/{slug}', [ArtistController::class, 'view'])->name('view');
+        Route::get('/{id}', [ArtistController::class, 'view'])->name('view');
     }); 
     // Artists
     Route::prefix('clubs')->name('clubs')->group(function () {
         Route::get('/', [ClubController::class, 'index'])->name('index');
-        Route::get('/{slug}', [ClubController::class, 'view'])->name('view');
+        Route::get('/{id}', [ClubController::class, 'view'])->name('view');
     }); 
     // Calendar
     Route::prefix('calendar')->name('artists')->group(function () {
         Route::get('/', [CalendarController::class, 'page'])->name('index');
         Route::get('/list', [CalendarController::class, 'list'])->name('list');
+    }); 
+    // Calendar
+    Route::prefix('requests')->name('requests')->group(function () {
+        Route::get('/', [RequestController::class, 'index'])->name('index');
+        Route::get('/{id}', [RequestController::class, 'view'])->name('view');
     });
 
     // Settings
     Route::prefix('settings')->name('settings')->group(function () {
-        Route::get('/', [ArtistController::class, 'index'])->name('index');
-        Route::get('/{slug}', [ArtistController::class, 'view'])->name('view');
+        Route::get('/', [SettingsController::class, 'page'])->name('page');
+        Route::get('/{slug}', [SettingsController::class, 'view'])->name('view');
     }); 
 });

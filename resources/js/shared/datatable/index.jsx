@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { Table, Button, Popover, Checkbox } from "antd";
 import { router } from "@inertiajs/react";
+import { IconFilter, IconFilterBolt } from "@tabler/icons-react";
+import { FilterHorizontalIcon } from "hugeicons-react";
 
 const Datatable = ({ columns, data, initialFilters = null, ...props }) => {
     const [filters, setFilters] = useState(initialFilters?.filter || {});
@@ -39,34 +41,17 @@ const Datatable = ({ columns, data, initialFilters = null, ...props }) => {
         [filters]
     );
 
-    const content = (
-        <div>
-            {columns.map((col) =>
-                col.filterable ? (
-                    <div key={col.key} style={{ marginBottom: 8 }}>
-                        <Checkbox
-                            checked={!!filters[col.key]}
-                            onChange={(e) => handleFilterChange(col.key, e.target.checked ? "value" : null)} // Customize the value as needed
-                        >
-                            {col.title}
-                        </Checkbox>
-                    </div>
-                ) : null
-            )}
-        </div>
-    );
 
     return (
         <div style={{ position: "relative" }}>
             <div style={{ textAlign: "right", marginBottom: 16 }}>
                 <Popover
-                    content={content}
+                    //content={content}
                     title="Filters"
                     trigger="click"
-                    visible={visible}
-                    onVisibleChange={setVisible}
+                    open={visible}
                 >
-                    <Button type="primary">Filters</Button>
+                    <Button icon={<FilterHorizontalIcon/>}>Filters</Button>
                 </Popover>
             </div>
             <Table

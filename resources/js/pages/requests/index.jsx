@@ -11,7 +11,7 @@ import {
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
-import { Delete02Icon, Edit02Icon, PencilEdit02Icon, PlusSignIcon } from "hugeicons-react";
+import { Delete02Icon, Edit02Icon, Message01Icon, PencilEdit02Icon, PlusSignIcon } from "hugeicons-react";
 
 const Products = (props) => {
     const { data, filters, processing } = props;
@@ -30,12 +30,12 @@ const Products = (props) => {
             filterable: true,
             sorter: (a, b) => a.name - b.name,
             render: (record) => (
-                <Link href={`/artists/${record?.id}`}>
+                <Link href={`/requests/${record?.id}`}>
                     <Space split={<Divider type="vertical" />}>
                         <Avatar
                             
                             shape="square"
-                            src={record?.iamge || "/images/placeholder.svg"}
+                            icon={<Message01Icon size={22}/>}
                         />
                         <span>{record?.name}</span>
                     </Space>
@@ -106,7 +106,7 @@ const Products = (props) => {
 
     return (
         <AppLayout
-            title={`Artisti (${data?.total})`}
+            title={`Richieste (${data?.total})`}
             extra={
                 <Button
                     type="primary"

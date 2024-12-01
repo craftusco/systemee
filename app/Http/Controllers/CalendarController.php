@@ -13,12 +13,17 @@ class CalendarController extends Controller
     {
         $filters = $request->query() ?: null;
         //dd($filters);
-        // Build the query with allowed filters
+        
+        $data = QueryBuilder::for(Event::class)
+            ->allowedFilters(['name'])
+            ->paginate($filters['per_page'] ?? 30)
+            ->appends(request()->query()); 
+        
 
         return Inertia::render('calendar/index', [
-            "data" => null,
-            'filters' => null
-            // Pass the filters to Inertia so the frontend can initialize them
+            "data" => $data,
+            'filters' => $filters
+            
         ]);
     } 
     
@@ -26,12 +31,17 @@ class CalendarController extends Controller
     {
         $filters = $request->query() ?: null;
         //dd($filters);
-        // Build the query with allowed filters
+        
+        $data = QueryBuilder::for(Event::class)
+            ->allowedFilters(['name'])
+            ->paginate($filters['per_page'] ?? 30)
+            ->appends(request()->query()); 
+        
 
         return Inertia::render('calendar/list', [
-            "data" => null,
-            'filters' => null
-            // Pass the filters to Inertia so the frontend can initialize them
+            "data" => $data,
+            'filters' => $filters
+            
         ]);
     }
 

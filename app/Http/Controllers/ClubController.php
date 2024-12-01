@@ -13,17 +13,17 @@ class ClubController extends Controller
     {
         $filters = $request->query() ?: null;
         //dd($filters);
-        // Build the query with allowed filters
+        
         $products = QueryBuilder::for(Club::class)
             ->allowedFilters(['name', 'gender'])
             ->paginate($filters['per_page'] ?? 30)
-            ->appends(request()->query()); // Add the current query params to pagination links
+            ->appends(request()->query()); 
 
 
         return Inertia::render('clubs/index', [
             "data" => $products,
             'filters' => $filters
-            // Pass the filters to Inertia so the frontend can initialize them
+            
         ]);
     }
 

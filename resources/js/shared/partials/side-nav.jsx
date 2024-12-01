@@ -4,15 +4,24 @@ import {
     IconUserCircle,
     IconChevronDown,
     IconLogout,
+    IconLogout2,
 } from "@tabler/icons-react";
-import { Icon } from '@iconify/react';
-import { Avatar, Divider, Menu, Dropdown } from "antd";
+
+import { Avatar, Divider, Menu, Dropdown, Tag } from "antd";
 import confirm from "../components/confirm";
+import {
+    Analytics01Icon,
+    Calendar03Icon,
+    Home01Icon,
+    Message01Icon,
+    MusicNoteSquare01Icon,
+    Settings02Icon,
+    Vynil03Icon,
+} from "hugeicons-react";
 
 const SideNav = () => {
     const defaultSelected = usePage().url;
     const { isLoggedIn, user } = usePage().props.auth;
-    console.log("defaultSelected", defaultSelected);
 
     const handleLogout = async () => {
         return confirm({
@@ -31,7 +40,7 @@ const SideNav = () => {
     const accountItems = [
         {
             key: "profile",
-            icon: <IconUserCircle className="text-primary" />,
+            icon: <IconUserCircle size={22} />,
             label: <Link href="/admin/profile">Il mio profilo</Link>,
         },
         {
@@ -42,7 +51,7 @@ const SideNav = () => {
             danger: true,
 
             onClick: () => handleLogout(),
-            icon: <IconLogout className="text-red" />,
+            icon: <IconLogout2 size={22} className="text-red" />,
             label: "Logout",
         },
     ];
@@ -50,78 +59,79 @@ const SideNav = () => {
     const items = [
         {
             key: "/",
-            icon: <Icon icon="solar:home-2-linear" />,
+            icon: <Home01Icon size={22} />,
             label: <Link href="/">Home</Link>,
         },
         {
             key: "/artists",
-            icon: <Icon icon="solar:music-note-outline" />,
+            type: 'group',
+            label: "Generale",
+        }, 
+        {
+            key: "/artists",
+            icon: <MusicNoteSquare01Icon size={22} />,
             label: <Link href="/artists">Artisti</Link>,
         },
         {
             key: "/clubs",
-            icon: null,
+            icon: <Vynil03Icon size={22} />,
             label: <Link href="/clubs">Club</Link>,
         },
         {
-            key: "/calendar/[id]",
-            icon: <Icon icon="solar:calendar-add-linear" />,
-            label: <Link href="/calendar">Calendario</Link>,
+            key: "/calendar",
+            type: 'group',
+            icon: <Calendar03Icon size={22} />,
+            label: "Calendario",
             children: [
                 {
                     key: "/calendar",
-                    icon: null,
+                    icon: <Calendar03Icon size={22} />,
+                    extra: (<Tag color="blue">12+</Tag>),
                     label: <Link href="/calendar">Calendario</Link>,
                 },
                 {
                     key: "/calendar/list",
-                    icon: null,
+                    icon: <Calendar03Icon size={22} />,
                     label: <Link href="/calendar/list">Lista eventi</Link>,
                 },
             ],
         },
         {
-            type: "divider",
+            key: "/other",
+            type: 'group',
+            label: "Altro",
         },
         {
             key: "/requests",
-            icon: <Icon icon="solar:chat-line-outline" />,
-            label: <Link href="/warnings">Richieste</Link>,
-        }, 
-        {
-            key: "/analytics",
-            icon: <Icon icon="solar:chat-square-2-linear" />,
-            label: <Link href="/warnings">Analisi</Link>,
+            icon: <Message01Icon size={22} />,
+            label: <Link href="/requests">Richieste</Link>,
         },
         {
-            type: "divider",
+            key: "/analytics",
+            icon: <Analytics01Icon size={22} />,
+            label: <Link href="/analytics">Analisi</Link>,
         },
         {
             key: "/settings",
-            icon: <Icon icon="solar:settings-linear" />,
-            label: (
-                <Link href="/settings">
-                    Impostazioni
-                </Link>
-            ),
+            icon: <Settings02Icon size={22} />,
+            label: <Link href="/settings">Impostazioni</Link>,
         },
     ];
 
     return (
-        <aside>
-            <div className="float-right">
+        <aside className="h-full">
+            <div className="p-2">
                 <Dropdown
-                    className="min-w-full"
                     trigger={["click"]}
                     placement="bottomRight"
                     menu={{
                         accountItems,
                     }}
                 >
-                    <div className="flex items-center cursor-pointer h-full">
+                    <div className="flex items-center cursor-pointer h-full w-full">
                         <Avatar
                             shape="square"
-                            icon={<IconUserCircle className="text-primary" />}
+                            icon={<IconUserCircle size={22} />}
                         />
                         <Divider type="vertical" />
                         <div className="block">
@@ -136,6 +146,9 @@ const SideNav = () => {
                 mode="inline"
                 defaultSelectedKeys={defaultSelected}
                 items={items}
+                inlineIndent={12}
+                id="side-nav"
+                className="h-full flex flex-col"
             />
         </aside>
     );

@@ -94,6 +94,13 @@ button.ant-btn.ant-btn-black {
   width: 40px;
 }
 
+#side-nav li:last-of-type {
+  margin-top: auto;
+  flex-grow: 0;
+  bottom: 8px;
+  position: sticky;
+}
+
 @media only screen and (max-width: 768px) {
   .ant-drawer-content-wrapper {
    width: 100% !important;

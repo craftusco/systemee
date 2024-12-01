@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Statistic, List } from "antd";
-import PageActions from "@/shared/components/page-actions";
+
 import { IconBox, IconClock, IconUsersGroup } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
 import AppLayout from "@/layouts/app-layout";
@@ -20,18 +20,11 @@ const PageIndex = (props) => {
             value: data?.total_suppliers || 0,
             icon: <IconUsersGroup />,
             url: "/clubs",
-        },
-        {
-            label: "Ultima sincronizzazione",
-            value: data?.last_sync || null,
-            icon: <IconClock />,
-            url: "#",
-        },
+        }
     ];
 
     return (
         <AppLayout title="Home">
-            <PageActions title="Dashboard" />
             <div className="page-content">
                 <Row gutter={[16, 16]}>
                     {navLinks.map((item, i) => (

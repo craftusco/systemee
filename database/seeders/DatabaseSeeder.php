@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
 
         // Seed Artists
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('artists')->insert([
                 'name' => $faker->name,
                 'genre' => $faker->word,
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Seed Clubs
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             DB::table('clubs')->insert([
                 'name' => $faker->company . ' Club',
                 'location' => $faker->address,
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Seed Events and associate with multiple artists
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 150; $i++) {
             $eventId = DB::table('events')->insertGetId([
                 'title' => $faker->sentence,
                 'start_time' => $faker->dateTimeBetween('+1 days', '+10 days'),
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             ]);
 
             // Associate the event with 1-3 random artists
-            $artistIds = range(1, 10);
+            $artistIds = range(1, 100);
             shuffle($artistIds);
             foreach (array_slice($artistIds, 0, rand(1, 3)) as $artistId) {
                 DB::table('event_artist')->insert([

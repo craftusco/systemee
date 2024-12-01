@@ -10,7 +10,7 @@ import {
     Card,
 } from "antd";
 const { Text, Title } = Typography;
-import PageActions from "@/shared/components/page-actions";
+
 import {
     IconEye,
     IconCloudUpload,
@@ -41,7 +41,7 @@ const View = (props) => {
                 <Link href={`/artists/${record?.id}`}>
                     <Space>
                         <Avatar
-                            size="large"
+                            
                             shape="square"
                             src={record?.iamge || "/images/placeholder.svg"}
                         />
@@ -84,13 +84,7 @@ const View = (props) => {
             value: data?.total_products || 0,
             icon: <IconBox />,
             url: "/artists",
-        },
-        {
-            label: "Ultima sincronizzazione",
-            value: data?.updated_at || null,
-            icon: <IconClock />,
-            url: "#",
-        },
+        }
     ];
 
 
@@ -109,13 +103,11 @@ const View = (props) => {
     };
 
     return (
-        <AppLayout>
-            <PageActions
-                backUrl="/clubs"
+        <AppLayout backUrl="/clubs"
                 title={
                     <>
                         {" "}
-                        Dettagli Fornitore - <mark>{data?.name}</mark>
+                        Dettagli Club - <mark>{data?.name}</mark>
                     </>
                 }
                 extra={[
@@ -126,7 +118,7 @@ const View = (props) => {
                         </Button>
                     </Space>,
                 ]}
-            />
+            >
             <div className="page-content">
                 <Row gutter={[16, 16]}>
                     {navLinks.map((item, i) => (

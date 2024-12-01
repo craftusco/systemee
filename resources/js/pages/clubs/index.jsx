@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, Button, Divider, Space, Table } from "antd";
-import PageActions from "@/shared/components/page-actions";
+
 import { Link } from "@inertiajs/react";
 import { dateTimeFormatter } from "@/helpers/formatter";
-import {
-    IconEye,
-} from "@tabler/icons-react";
+import { IconEye } from "@tabler/icons-react";
 import Datatable from "@/shared/datatable";
 import AppLayout from "@/layouts/app-layout";
+import { PlusSignIcon } from "hugeicons-react";
 
 const Clubs = (props) => {
     const { data, filters, processing } = props;
@@ -24,7 +23,7 @@ const Clubs = (props) => {
                 <Link href={`/clubs/${record?.id}`}>
                     <Space split={<Divider type="vertical" />}>
                         <Avatar
-                            size="large"
+                            
                             shape="square"
                             src={record?.iamge || "/images/placeholder.svg"}
                         />
@@ -70,15 +69,25 @@ const Clubs = (props) => {
     ];
 
     return (
-        <AppLayout>
-            <PageActions title={`Club (${data?.total})`} />
+        <AppLayout
+            title={`Club (${data?.total})`}
+            extra={
+                <Button
+                    type="primary"
+                    icon={<PlusSignIcon size={22} />}
+                    onClick={() => togglePopup()}
+                >
+                    Aggiungi
+                </Button>
+            }
+        >
             <div className="page-content">
-            <Datatable
-                        columns={columns}
-                        data={data}
-                        processing={processing}
-                        initialFilters={filters}
-                    />
+                <Datatable
+                    columns={columns}
+                    data={data}
+                    processing={processing}
+                    initialFilters={filters}
+                />
             </div>
         </AppLayout>
     );

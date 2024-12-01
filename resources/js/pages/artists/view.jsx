@@ -14,7 +14,7 @@ import {
 } from "antd";
 const { Text, Title } = Typography;
 const { Meta } = Card;
-import PageActions from "@/shared/components/page-actions";
+
 import {
     IconCompass,
     Icon123,
@@ -41,92 +41,71 @@ const View = (props) => {
         { label: "Nome del Prodotto", value: data?.name },
         { label: "SKU", value: data?.sku },
         { label: "Prezzo", value: data?.price },
-        { label: "Prezzo Regolare", value: data?.regular_price },
-        { label: "Prezzo Scontato", value: data?.sale_price },
-        { label: "Stato Scorte", value: data?.stock_status }, // Stato delle scorte (Disponibile, Non disponibile)
-        {
-            label: "Categorie",
-            value: data?.categories?.map((cat) => cat.name).join(", "),
-        }, // Categorie
-        { label: "Tag", value: data?.tags?.map((tag) => tag.name).join(", ") }, // Tag
-        { label: "Descrizione", value: data?.description }, // Descrizione
-        { label: "Descrizione Breve", value: data?.short_description }, // Descrizione breve
-        { label: "Peso", value: data?.weight }, // Peso del prodotto
-        {
-            label: "Dimensioni",
-            value: `${data?.dimensions?.length} x ${data?.dimensions?.width} x ${data?.dimensions?.height}`,
-        }, // Dimensioni (Lunghezza, Larghezza, Altezza)
-        { label: "Quantità in Stock", value: data?.stock_quantity }, // Quantità in stock
-        { label: "Data di Creazione", value: data?.date_created }, // Data di creazione
-        { label: "Data di Modifica", value: data?.date_modified }, // Data di modifica
     ];
 
     const tableActions = [
         {
-          onClick: () => setModal(!modal),
-          label: "Modifica",
+            onClick: () => setModal(!modal),
+            label: "Modifica",
         },
         {
-          type: "divider",
+            type: "divider",
         },
         {
-          key: 2,
-          danger: true,
-          icon: <IconTrash />,
-          disabled: true,
-          label: "Elimina",
-          // onClick: async () => {
-          //   if (selected?.user_id) {
-          //     handleDelete(selected?.user_id);
-          //   } else {
-          //     console.error('documentId is undefined');
-          //   }
-          // },
+            key: 2,
+            danger: true,
+            icon: <IconTrash />,
+            disabled: true,
+            label: "Elimina",
+            // onClick: async () => {
+            //   if (selected?.user_id) {
+            //     handleDelete(selected?.user_id);
+            //   } else {
+            //     console.error('documentId is undefined');
+            //   }
+            // },
         },
-      ];
+    ];
 
     return (
-        <AppLayout>
-                <PageActions
-                    backUrl="/artists"
-                    title={`Artista - ${data?.name}`}
-                    subTitle={`Fornitore - ${data?.supplier?.name}`}
-                    extra={
-                        <Space>
-                          <Dropdown
-                            menu={{ items: tableActions }}
-                            placement="bottomRight"
-                            trigger={["click"]}
-                          >
-                            <Button icon={<IconDots />} type="text">
-                              Altro
-                            </Button>
-                          </Dropdown>
-                        </Space>
-                      }
-                />
-                <div className="page-content">
-                    <Row gutter={[16, 16]}>
-                        <Col span={12}>
-                            <Card title="Dettagli prodotto">
-                                <List
-                                    dataSource={productInfo}
-                                    renderItem={(item) => (
-                                        <List.Item>
-                                            <Text strong>{item.label}:</Text>{" "}
-                                            <Text>{item.value}</Text>
-                                        </List.Item>
-                                    )}
-                                />
-                            </Card>
-                        </Col>
-                        <Col span={12}>
-                        <Card title="Lista prezzi">
-                            <FormBody data={data} />
+        <AppLayout
+            backUrl="/artists"
+            title={`Artista - ${data?.name}`}
+            subTitle={`Club - ${data?.supplier?.name}`}
+            extra={
+                <Space>
+                    <Dropdown
+                        menu={{ items: tableActions }}
+                        placement="bottomRight"
+                        trigger={["click"]}
+                    >
+                        <Button icon={<IconDots />}>
+                            Altro
+                        </Button>
+                    </Dropdown>
+                </Space>
+            }
+        >
+            <div className="page-content">
+                <Row gutter={[16, 16]}>
+                    <Col span={12}>
+                        <Card title="Dettagli prodotto">
+                            <List
+                                dataSource={productInfo}
+                                renderItem={(item) => (
+                                    <List.Item>
+                                        <Text strong>{item.label}:</Text>{" "}
+                                        <Text>{item.value}</Text>
+                                    </List.Item>
+                                )}
+                            />
                         </Card>
-                        </Col>
-                    </Row>
-                </div>
+                    </Col>
+                    <Col span={12}>
+                       
+                    </Col>
+                </Row>
+            </div>
         </AppLayout>
     );
 };

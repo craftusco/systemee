@@ -39,15 +39,6 @@ const PageActions = (props) => {
                     <Space>{props.extra}</Space>
                 </Col>
             </Row>
-            {props.children && (
-                <Row className="mt-1" key={`row-` + 1}>
-                    {React.Children.map(props.children, (child, index) => (
-                        <div key={index} style={{width: "100%"}}>
-                            {child}
-                        </div>
-                    ))}
-                </Row>
-            )}
             <Divider />
         </div>
     );

@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ArtistController extends Controller
+class RequestController extends Controller
 {
     public function index(Request $request)
     {
         $filters = $request->query() ?: null;
         //dd($filters);
         
-        $products = QueryBuilder::for(Artist::class)
+        $requests = QueryBuilder::for(Artist::class)
             ->allowedFilters(['name', 'gender'])
             ->paginate($filters['per_page'] ?? 30)
             ->appends(request()->query()); 
 
 
-        return Inertia::render('artists/index', [
-            "data" => $products,
+        return Inertia::render('requests/index', [
+            "data" => $requests,
             'filters' => $filters
             
         ]);
@@ -31,7 +31,7 @@ class ArtistController extends Controller
     public function view($id)
     {
         $product = Artist::where("id", $id)->first();
-        return Inertia::render('artists/view', ['data' => $product]);
+        return Inertia::render('requests/view', ['data' => $product]);
     }
 
 }
