@@ -13,6 +13,8 @@ const PageActions = (props) => {
                         {props.backUrl && (
                             <Link href={props.backUrl}>
                                 <Button
+                                type="text"
+                                size="icon"
                                     icon={
                                         <IconChevronLeft className="anticon" />
                                     }
@@ -36,7 +38,7 @@ const PageActions = (props) => {
                     style={{ textAlign: "right" }}
                     key={`col-` + 1}
                 >
-                    <Space>{props.extra}</Space>
+                    {props.extra}
                 </Col>
             </Row>
             <Divider />

@@ -12,6 +12,7 @@ import confirm from "../components/confirm";
 import {
     Analytics01Icon,
     Calendar03Icon,
+    CalendarCheckIn01Icon,
     Home01Icon,
     Message01Icon,
     MusicNoteSquare01Icon,
@@ -91,7 +92,7 @@ const SideNav = () => {
                 },
                 {
                     key: "/calendar/list",
-                    icon: <Calendar03Icon size={22} />,
+                    icon: <CalendarCheckIn01Icon size={22} />,
                     label: <Link href="/calendar/list">Lista eventi</Link>,
                 },
             ],

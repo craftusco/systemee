@@ -10,6 +10,9 @@ export default {
 ],
   theme: {
     extend: {
+      colors: {
+        primary: '#029182',
+      },
       container: {
         center: true,
         padding: {

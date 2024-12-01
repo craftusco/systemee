@@ -1,81 +1,46 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Statistic, List } from "antd";
-
-import { IconBox, IconClock, IconUsersGroup } from "@tabler/icons-react";
+import { Row, Col, Card, Avatar, Typography } from "antd";
+const { Meta } = Card;
+const { Text, Title } = Typography;
 import { Link } from "@inertiajs/react";
 import AppLayout from "@/layouts/app-layout";
+import SettingsLayout from "@/layouts/settings-layout";
+import { settingLinks } from "@/shared/settings/nav-links";
 
 const PageSettings = (props) => {
-    const { data } = props;
-    console.log("🌱 page:", props);
-    const navLinks = [
-        {
-            label: "Tot. Artisti",
-            value: data?.total_products || 0,
-            icon: <IconBox />,
-            url: "/artists",
-        },
-        {
-            label: "Tot. Club",
-            value: data?.total_suppliers || 0,
-            icon: <IconUsersGroup />,
-            url: "/clubs",
-        }
-    ];
-
     return (
-        <AppLayout title="Impostazioni">
-            <div className="page-content">
-                <Row gutter={[16, 16]}>
-                    {navLinks.map((item, i) => (
+        <SettingsLayout title="Impostazioni">
+            {settingLinks.map((section, i) => (
+                <Row gutter={[16, 16]} key={i} className="mb-4">
+                    <Col key={i} span={24}>
+                        <Title level={5}>{section.title}</Title>
+                    </Col>
+                    {section.items.map((item, j) => (
                         <Col
-                            span={6}
+                            span={4}
                             xl={6}
                             lg={6}
-                            md={6}
+                            md={4}
                             sm={24}
                             xs={24}
-                            key={i}
+                            key={j}
                         >
                             <Card>
                                 <Link href={item.url}>
-                                    <Statistic
+                                    <Meta
+                                        avatar={
+                                            <Avatar shape="square" icon={item?.icon}/>
+                                        }
                                         title={item.label}
-                                        value={item.value}
-                                        prefix={item.icon}
+                                        description={item.description}
                                     />
                                 </Link>
                             </Card>
                         </Col>
                     ))}
                 </Row>
-                <Row gutter={[16, 16]}>
-                    <Col
-                        span={6}
-                        xl={6}
-                        lg={6}
-                        md={6}
-                        sm={24}
-                        xs={24}
-                        key="calendar"
-                    >
-                        <Card title="Calendario">
-                            <List
-                                bordered
-                                dataSource={data?.calendar}
-                                renderItem={(item) => (
-                                    <List.Item>
-                                        <Link href={item.url}>
-                                            {item.title}
-                                        </Link>
-                                    </List.Item>
-                                )}
-                            />
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-        </AppLayout>
+            ))}
+        </SettingsLayout>
     );
 };
 

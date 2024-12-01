@@ -1,60 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Statistic, List } from "antd";
-
-import { IconBox, IconClock, IconUsersGroup } from "@tabler/icons-react";
-import { Link } from "@inertiajs/react";
+import { Row, Col, Card, List } from "antd";
+import { Link, usePage } from "@inertiajs/react";
 import AppLayout from "@/layouts/app-layout";
+import HomeStats from "@/shared/home/stats";
 
 const PageIndex = (props) => {
     const { data } = props;
-    console.log("🌱 page:", props);
-    const navLinks = [
-        {
-            label: "Tot. Artisti",
-            value: data?.total_products || 0,
-            icon: <IconBox />,
-            url: "/artists",
-        },
-        {
-            label: "Tot. Club",
-            value: data?.total_suppliers || 0,
-            icon: <IconUsersGroup />,
-            url: "/clubs",
-        }
-    ];
+    const { isLoggedIn, user } = usePage().props.auth;
 
     return (
-        <AppLayout title="Home">
+        <AppLayout title={`Ciao, ${user?.name}`}>
             <div className="page-content">
-                <Row gutter={[16, 16]}>
-                    {navLinks.map((item, i) => (
-                        <Col
-                            span={6}
-                            xl={6}
-                            lg={6}
-                            md={6}
-                            sm={24}
-                            xs={24}
-                            key={i}
-                        >
-                            <Card>
-                                <Link href={item.url}>
-                                    <Statistic
-                                        title={item.label}
-                                        value={item.value}
-                                        prefix={item.icon}
-                                    />
-                                </Link>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
+                <HomeStats data={data} />
                 <Row gutter={[16, 16]}>
                     <Col
-                        span={6}
-                        xl={6}
-                        lg={6}
-                        md={6}
+                        span={12}
+                        xl={12}
+                        lg={12}
+                        md={12}
                         sm={24}
                         xs={24}
                         key="calendar"
