@@ -1,0 +1,16 @@
+{
+  "resources/assets/styles/app.css": {
+    "file": "assets/app-D90N8vBq.css",
+    "src": "resources/assets/styles/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-CDvzb86_.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "css": [
+      "assets/app-D90N8vBq.css"
+    ]
+  }
+}

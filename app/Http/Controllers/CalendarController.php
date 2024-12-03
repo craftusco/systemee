@@ -16,7 +16,7 @@ class CalendarController extends Controller
         
         $data = QueryBuilder::for(Event::class)
             ->allowedFilters(['name'])
-            ->paginate($filters['per_page'] ?? 30)
+            ->paginate($filters['page_size'] ?? 30)
             ->appends(request()->query()); 
         
 
@@ -29,12 +29,12 @@ class CalendarController extends Controller
     
     public function list(Request $request)
     {
-        $filters = $request->query() ?: null;
+        $filters = $request->query() ?: [];
         //dd($filters);
         
         $data = QueryBuilder::for(Event::class)
             ->allowedFilters(['name'])
-            ->paginate($filters['per_page'] ?? 30)
+            ->paginate((int) $filters['page_size'] ?? 25)
             ->appends(request()->query()); 
         
 

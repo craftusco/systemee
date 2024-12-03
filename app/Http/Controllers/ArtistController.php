@@ -11,12 +11,14 @@ class ArtistController extends Controller
 {
     public function index(Request $request)
     {
-        $filters = $request->query() ?: null;
+        $filters = $request->query() ?: [
+            'page_size' => $request['page_size'] || 25 
+        ];
         //dd($filters);
         
         $products = QueryBuilder::for(Artist::class)
             ->allowedFilters(['name', 'gender'])
-            ->paginate($filters['per_page'] ?? 30)
+            ->paginate((int) $filters['page_size'])
             ->appends(request()->query()); 
 
 

@@ -16,7 +16,7 @@ class RequestController extends Controller
         
         $requests = QueryBuilder::for(Artist::class)
             ->allowedFilters(['name', 'gender'])
-            ->paginate($filters['per_page'] ?? 30)
+            ->paginate((int) $filters['page_size'] ?? 25)
             ->appends(request()->query()); 
 
 

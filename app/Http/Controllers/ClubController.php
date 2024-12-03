@@ -16,7 +16,7 @@ class ClubController extends Controller
         
         $products = QueryBuilder::for(Club::class)
             ->allowedFilters(['name', 'gender'])
-            ->paginate($filters['per_page'] ?? 30)
+            ->paginate((int) $filters['page_size'] ?? 25)
             ->appends(request()->query()); 
 
 

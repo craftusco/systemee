@@ -13,7 +13,7 @@ import { useForm } from "@inertiajs/react";
 const { TextArea } = Input;
 
 const ModalEvent = (props) =>{
-  const { isOpened, onClose, initialData, resource } = props;
+  const { isOpened, onClose, initialData } = props;
   const { data, setData, post, processing } = useForm({
     title: "",
     descripton: "",
