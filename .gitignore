@@ -15,4 +15,4 @@ yarn-error.log
 /.idea
 /.vscode
 .DS_Store
-public/productfeed_it_v3.json
+storage/logs/*.log
