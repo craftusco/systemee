@@ -1,14 +1,27 @@
 import React, { useState, useCallback } from "react";
-import { Table, Input } from "antd";
+import { Table, Input, Button, Flex, Card } from "antd";
 import { router } from "@inertiajs/react";
+import FilterInput from "./filter-input";
+import {
+    IconAdjustments,
+    IconChevronLeft,
+    IconChevronRight,
+    IconFilters,
+} from "@tabler/icons-react";
+import ModalFilters from "./filters/modal-filters";
 
-const Datatable = ({ columns, data, initialFilters = null, ...props }) => {
+const Datatable = ({
+    columns,
+    data = {},
+    meta,
+    initialFilters = {},
+    ...props
+}) => {
     const [filters, setFilters] = useState(initialFilters?.filter || {});
+    const [modalFilters, setModalFilters] = useState(false);
     const [debounceTimeout, setDebounceTimeout] = useState(null);
 
-    console.log("filters:", filters);
-
-    const { current_page, per_page, total, data: rows } = data;
+    const { current_page, per_page = 25, total } = meta;
 
     const handleInputChange = (value, key) => {
         if (debounceTimeout) clearTimeout(debounceTimeout);
@@ -20,7 +33,7 @@ const Datatable = ({ columns, data, initialFilters = null, ...props }) => {
             router.get(window.location.href, {
                 filter: newFilters,
                 page: 1,
-                page_size: per_page,
+                per_page: per_page,
             });
         }, 500);
 
@@ -33,44 +46,43 @@ const Datatable = ({ columns, data, initialFilters = null, ...props }) => {
             router.get(window.location.href, {
                 filter: filters,
                 page: current,
-                page_size: pageSize ?? 30,
+                per_page: pageSize,
             });
         },
         [filters] // Only recreate the function when filters change
     );
 
-    const modifiedColumns = columns?.map((col) => ({
-        ...col,
-        title: col.filterable ? (
-            <>
-                {col.title}
-                <Input
-                    placeholder={`Cerca...`}
-                    value={filters[col.key] || null}
-                    allowClear
-                    onChange={(e) => handleInputChange(e.target.value, col.key)}
-                />
-            </>
-        ) : (
-            col.title
-        ),
-    }));
-
     return (
-        <Table
-            columns={modifiedColumns}
-            dataSource={rows || []}
-            rowKey="id"
-            pagination={{
-                hideOnSinglePage: true,
-                position: ["bottomCenter"],
-                current: current_page,
-                total: total,
-                pageSize: per_page,
-            }}
-            onChange={handleTableChange}
-            {...props}
-        />
+        <>
+            {modalFilters && (
+                <ModalFilters isOpened={modalFilters} onClose={() => setModalFilters(!modalFilters)} />
+            )}
+            <div className="flex justify-between items-center gap-4 mb-1">
+                <Input placeholder="Cerca qui" />
+                <Button
+                    icon={<IconAdjustments />}
+                    onClick={() => setModalFilters(!modalFilters)}
+                >
+                    Filtri
+                </Button>
+            </div>
+            <Table
+                columns={columns}
+                dataSource={data || []}
+                rowKey="id"
+                pagination={{
+                    hideOnSinglePage: true,
+                    position: ["bottomRight"],
+                    current: current_page,
+                    total: total,
+                    pageSize: per_page,
+                    // nextIcon: <Button icon={<IconChevronRight/>}/>,
+                    // prevIcon: <Button icon={<IconChevronLeft/>}/>
+                }}
+                onChange={handleTableChange}
+                {...props}
+            />
+        </>
     );
 };
 

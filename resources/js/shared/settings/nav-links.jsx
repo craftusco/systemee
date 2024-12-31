@@ -1,4 +1,4 @@
-import { LockedIcon, Setting07Icon, UserMultiple02Icon, UserSearch01Icon } from "hugeicons-react";
+import { Icon123, IconLockAccess, IconUsers } from "@tabler/icons-react";
 
 export const settingLinks = [
   {
@@ -7,13 +7,13 @@ export const settingLinks = [
       {
         label: "Utenti",
         description: "Gestisci gli utenti",
-        icon: <UserMultiple02Icon size={22} className="text-primary"/>,
+        icon: <IconUsers/>,
         url: "/settings/users",
       },
       {
         label: "Ruoli",
         description: "Gestisci i ruoli",
-        icon: <LockedIcon size={22} className="text-primary"/>,
+        icon: <IconLockAccess/>,
         url: "/settings/roles",
       },
     ]},
@@ -23,7 +23,7 @@ export const settingLinks = [
       {
         label: "Activity viewer",
         description: "Activity reports overview",
-        icon: <Setting07Icon size={22} className="text-primary"/>,
+        icon: <Icon123/>,
         url: "/reports/activity",
       }
     ],

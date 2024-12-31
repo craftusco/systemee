@@ -3,7 +3,7 @@ import AuthLayout from "@/layouts/auth-layout";
 import { Button, Form, Input, message } from "antd";
 import { Link, useForm } from "@inertiajs/react";
 
-const Login = (props) => {
+const ForgotPassword = (props) => {
     const [form] = Form.useForm();
     const { data, setData, post, processing, errors } = useForm({
         email: "",
@@ -31,7 +31,7 @@ const Login = (props) => {
     };
 
     return (
-        <AuthLayout title="Accedi">
+        <AuthLayout title="Password dimenticata">
             <Form
                 layout="vertical"
                 autoComplete="off"
@@ -40,27 +40,9 @@ const Login = (props) => {
                 onFinish={handleSubmit}
                 disabled={processing}
             >
-                <Form.Item
+                 <Form.Item
                     label="Email"
                     name="email"
-                    validateStatus={errors.email ? "error" : ""}
-                    help={errors.email || ""}
-                    rules={[
-                        {
-                            required: true,
-                            message: "Il campo email è obbligatorio.",
-                        },
-                        {
-                            type: "email",
-                            message: "Inserisci un'email valida.",
-                        },
-                    ]}
-                >
-                    <Input placeholder="Inserisci email" />
-                </Form.Item>
-                <Form.Item
-                    label="Password"
-                    name="password"
                     validateStatus={errors.password ? "error" : ""}
                     help={errors.password || ""}
                     rules={[
@@ -79,17 +61,17 @@ const Login = (props) => {
                         block
                         loading={processing}
                     >
-                        Accedi
+                        Invia link ripristino password
                     </Button>
                 </Form.Item>
             </Form>
             <div className="my-4 text-center">
-                <Link href="/forgot-password" target="_blank">
-                Password dimenticata?
+                <Link href="/login">
+                    Torna al login
                 </Link>
             </div>
         </AuthLayout>
     );
 };
 
-export default Login;
+export default ForgotPassword;

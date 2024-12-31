@@ -12,7 +12,7 @@ import * as dayjs from "dayjs";
 import { useForm } from "@inertiajs/react";
 const { TextArea } = Input;
 
-const ModalEvent = (props) =>{
+const ModalFilters = (props) =>{
   const { isOpened, onClose, initialData } = props;
   const { data, setData, post, processing } = useForm({
     title: "",
@@ -43,7 +43,7 @@ const ModalEvent = (props) =>{
       centered
       maskClosable={false}
       onCancel={onClose}
-      title={initialData ? "Modifica evento" : "Nuovo evento"}
+      title="Applica filtri"
       footer={
         <>
           <Button type="default" onClick={onClose}>
@@ -52,12 +52,12 @@ const ModalEvent = (props) =>{
           <Button
             type="primary"
             htmlType="submit"
-            aria-label="Salva"
+            aria-label="Applica"
             form="form-reminder"
             loading={processing}
             disabled={!formTouched || processing}
           >
-            Salva
+            Applica
           </Button>
         </>
       }
@@ -98,4 +98,4 @@ const ModalEvent = (props) =>{
   );
 }
 
-export default ModalEvent;
+export default ModalFilters;

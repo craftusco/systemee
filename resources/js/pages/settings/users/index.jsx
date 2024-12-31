@@ -5,16 +5,17 @@ import { Link, usePage } from "@inertiajs/react";
 import {
     IconAlertCircle,
     IconCloudUpload,
+    IconUserFilled,
     IconDots,
     IconEye,
+    IconTrash, IconPencilMinus, IconPlus
 } from "@tabler/icons-react";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
-import { Delete02Icon, Edit02Icon, PencilEdit02Icon, PlusSignIcon } from "hugeicons-react";
 
-const Products = (props) => {
-    const { data, filters, processing } = props;
+const Users = (props) => {
+    const { data, meta, filters, processing } = props;
     console.log("🌱 page:", props);
     const [selected, setSelected] = useState([]);
     // Toggle popup
@@ -31,11 +32,10 @@ const Products = (props) => {
             sorter: (a, b) => a.name - b.name,
             render: (record) => (
                 <Link href={`/artists/${record?.id}`}>
-                    <Space split={<Divider type="vertical" />}>
+                    <Space>
                         <Avatar
-                            
                             shape="square"
-                            src={record?.iamge || "/images/placeholder.svg"}
+                            icon={<IconUserFilled />}
                         />
                         <span>{record?.name}</span>
                     </Space>
@@ -48,10 +48,16 @@ const Products = (props) => {
             key: "total_events",
         },
         {
-            title: "Prezzi",
-            type: "number",
-            key: "price",
-        },
+            title: "Ruoli",
+            key: "roles",
+            render: (record) => (
+                <>
+                    {record?.roles?.map((role) => (
+                        <Tag key={role?.id}>{role?.name}</Tag>
+                    ))}
+                </>
+            ),
+        },        
         {
             title: "Data creazione",
             key: "created_at",
@@ -62,7 +68,7 @@ const Products = (props) => {
             ),
         },
         {
-            title: "Azioni",
+            
             key: "actions",
             sorter: false,
             align: "right",
@@ -83,7 +89,7 @@ const Products = (props) => {
     const tableActions = [
         {
             key: 1,
-            icon: <PencilEdit02Icon size={22}/>,
+            icon: <IconPencilMinus/>,
             label: "Modifica",
         },
         {
@@ -92,7 +98,7 @@ const Products = (props) => {
         {
             key: 2,
             danger: true,
-            icon: <Delete02Icon size={22}/>,
+            icon: <IconTrash/>,
             label: "Elimina",
             // onClick: async () => {
             //   if (selected?.user_id) {
@@ -106,11 +112,11 @@ const Products = (props) => {
 
     return (
         <AppLayout
-            title={`Artisti (${data?.total})`}
+            title={`Utenti (${meta?.total})`}
             extra={
                 <Button
                     type="primary"
-                    icon={<PlusSignIcon size={22}/>}
+                    icon={<IconPlus/>}
                     onClick={() => togglePopup()}
                 >
                     Aggiungi
@@ -129,4 +135,4 @@ const Products = (props) => {
     );
 };
 
-export default Products;
+export default Users;

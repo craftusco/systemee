@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseHelper;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Event;
@@ -11,7 +12,7 @@ class CalendarController extends Controller
 {
     public function page(Request $request)
     {
-        $filters = $request->query() ?: null;
+        $filters = $request->query();
         //dd($filters);
         
         $data = QueryBuilder::for(Event::class)
@@ -21,27 +22,23 @@ class CalendarController extends Controller
         
 
         return Inertia::render('calendar/index', [
-            "data" => $data,
-            'filters' => $filters
-            
+            'page' => ResponseHelper::formatResponse($data, $filters)
         ]);
     } 
     
     public function list(Request $request)
     {
-        $filters = $request->query() ?: [];
+        $filters = $request->query();
         //dd($filters);
         
         $data = QueryBuilder::for(Event::class)
             ->allowedFilters(['name'])
-            ->paginate((int) $filters['page_size'] ?? 25)
+            ->paginate($filters['page_size'] ?? 25)
             ->appends(request()->query()); 
         
 
         return Inertia::render('calendar/list', [
-            "data" => $data,
-            'filters' => $filters
-            
+           'page' => ResponseHelper::formatResponse($data, $filters)
         ]);
     }
 
@@ -54,14 +51,14 @@ class CalendarController extends Controller
 
     public function api(Request $request)
     {
-        $filters = $request->query() ?: null;
-        $products = QueryBuilder::for(Event::with(['supplier']))
+        $filters = $request->query();
+        $data = QueryBuilder::for(Event::with(['supplier']))
             ->allowedFilters(['name', 'sku', 'category', 'supplier'])
             ->paginate(50)
             ->appends($filters);
 
         return response()->json([
-            "data" => $products,
+            'data' => $data,
             'filters' => $filters
         ]);
     }

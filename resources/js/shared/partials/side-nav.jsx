@@ -5,23 +5,22 @@ import {
     IconChevronDown,
     IconLogout,
     IconLogout2,
+    IconHome,
+    IconMusic,
+    IconClubs,
+    IconCalendar,
+    IconCalendarBolt,
+    IconCalendarDue,
+    IconMessage2,
+    IconAnalyze,
+    IconSettings,
 } from "@tabler/icons-react";
 
 import { Avatar, Divider, Menu, Dropdown, Tag } from "antd";
 import confirm from "../components/confirm";
-import {
-    Analytics01Icon,
-    Calendar03Icon,
-    CalendarCheckIn01Icon,
-    Home01Icon,
-    Message01Icon,
-    MusicNoteSquare01Icon,
-    Settings02Icon,
-    Vynil03Icon,
-} from "hugeicons-react";
 
 const SideNav = () => {
-    const defaultSelected = usePage().url;
+    const defaultSelected = usePage().url.split("?")[0];
     const { isLoggedIn, user } = usePage().props.auth;
 
     const handleLogout = async () => {
@@ -41,7 +40,7 @@ const SideNav = () => {
     const accountItems = [
         {
             key: "profile",
-            icon: <IconUserCircle size={22} />,
+            icon: <IconUserCircle />,
             label: <Link href="/admin/profile">Il mio profilo</Link>,
         },
         {
@@ -52,7 +51,7 @@ const SideNav = () => {
             danger: true,
 
             onClick: () => handleLogout(),
-            icon: <IconLogout2 size={22} className="text-red" />,
+            icon: <IconLogout />,
             label: "Logout",
         },
     ];
@@ -60,88 +59,68 @@ const SideNav = () => {
     const items = [
         {
             key: "/",
-            icon: <Home01Icon size={22} />,
+            icon: <IconHome />,
             label: <Link href="/">Home</Link>,
         },
         {
-            key: "/artists",
-            type: 'group',
+            key: "/artists-group",
+            type: "group",
             label: "Generale",
-        }, 
+        },
         {
             key: "/artists",
-            icon: <MusicNoteSquare01Icon size={22} />,
+            icon: <IconMusic />,
             label: <Link href="/artists">Artisti</Link>,
         },
         {
             key: "/clubs",
-            icon: <Vynil03Icon size={22} />,
+            icon: <IconClubs />,
             label: <Link href="/clubs">Club</Link>,
         },
         {
-            key: "/calendar",
-            type: 'group',
-            icon: <Calendar03Icon size={22} />,
+            key: "/calendar-group",
+            type: "group",
+            icon: <IconCalendar />,
             label: "Calendario",
             children: [
                 {
                     key: "/calendar",
-                    icon: <Calendar03Icon size={22} />,
-                    extra: (<Tag color="blue">12+</Tag>),
+                    icon: <IconCalendarBolt />,
+                    extra: <Tag color="blue">12+</Tag>,
                     label: <Link href="/calendar">Calendario</Link>,
                 },
                 {
                     key: "/calendar/list",
-                    icon: <CalendarCheckIn01Icon size={22} />,
+                    icon: <IconCalendarDue />,
                     label: <Link href="/calendar/list">Lista eventi</Link>,
                 },
             ],
         },
         {
             key: "/other",
-            type: 'group',
+            type: "group",
             label: "Altro",
         },
         {
             key: "/requests",
-            icon: <Message01Icon size={22} />,
+            icon: <IconMessage2 />,
             label: <Link href="/requests">Richieste</Link>,
         },
         {
             key: "/analytics",
-            icon: <Analytics01Icon size={22} />,
+            icon: <IconAnalyze />,
             label: <Link href="/analytics">Analisi</Link>,
         },
         {
             key: "/settings",
-            icon: <Settings02Icon size={22} />,
+            icon: <IconSettings />,
             label: <Link href="/settings">Impostazioni</Link>,
         },
     ];
 
     return (
         <aside className="h-full">
-            <div className="p-2">
-                <Dropdown
-                    trigger={["click"]}
-                    placement="bottomRight"
-                    menu={{
-                        accountItems,
-                    }}
-                >
-                    <div className="flex items-center cursor-pointer h-full w-full">
-                        <Avatar
-                            shape="square"
-                            icon={<IconUserCircle size={22} />}
-                        />
-                        <Divider type="vertical" />
-                        <div className="block">
-                            <span className="block w-100">{user?.name}</span>
-                        </div>
-                        <IconChevronDown color="#A1A8B0" />
-                    </div>
-                </Dropdown>
-            </div>
+            <div className="p-2 text-center text-white">Logo</div>
             <Divider />
             <Menu
                 mode="inline"
@@ -151,6 +130,23 @@ const SideNav = () => {
                 id="side-nav"
                 className="h-full flex flex-col"
             />
+            <Divider />
+            <Dropdown
+                trigger={["click"]}
+                placement="bottomRight"
+                menu={{
+                    accountItems,
+                }}
+            >
+                <div className="flex items-center cursor-pointer h-full w-full">
+                    <Avatar shape="square" icon={<IconUserCircle />} />
+                    <Divider type="vertical" />
+                    <div className="block">
+                        <span className="block w-100">{user?.name}</span>
+                    </div>
+                    <IconChevronDown color="#A1A8B0" />
+                </div>
+            </Dropdown>
         </aside>
     );
 };

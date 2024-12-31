@@ -13,7 +13,7 @@ import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
 
-const Roles = (props) => {
+const RoleView = (props) => {
     const { data, meta, filters, processing } = props;
     console.log("🌱 page:", props);
     const [selected, setSelected] = useState([]);
@@ -129,4 +129,4 @@ const Roles = (props) => {
     );
 };
 
-export default Roles;
+export default RoleView;

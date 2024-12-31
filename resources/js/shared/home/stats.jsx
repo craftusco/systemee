@@ -11,25 +11,25 @@ const HomeStats = (props) => {
     const navLinks = [
         {
             label: "Tot. Artisti",
-            value: data?.total_products || 0,
+            value: data?.total_artists || 0,
             icon: <IconBox />,
             url: "/artists",
         },
         {
             label: "Tot. Club",
-            value: data?.total_suppliers || 0,
+            value: data?.total_clubs || 0,
             icon: <IconUsersGroup />,
             url: "/clubs",
         },
         {
-            label: "Tot. Artisti",
-            value: data?.total_products || 0,
+            label: "Tot. Eventi",
+            value: data?.total_events || 0,
             icon: <IconBox />,
             url: "/artists",
         },
         {
-            label: "Tot. Club",
-            value: data?.total_suppliers || 0,
+            label: "Tot. Ordini",
+            value: data?.total_orders || 0,
             icon: <IconUsersGroup />,
             url: "/clubs",
         },
@@ -39,7 +39,6 @@ const HomeStats = (props) => {
         <section className="mb-4">
             <PageActions
                 title="Overview"
-                extra={<Select options={[{ value: "today", label: "Oggi" }]} />}
             />
             <Row gutter={[16, 16]}>
                 {navLinks.map((item, i) => (

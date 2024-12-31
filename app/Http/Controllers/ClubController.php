@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseHelper;
 use App\Models\Club;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,19 +12,17 @@ class ClubController extends Controller
 {
     public function index(Request $request)
     {
-        $filters = $request->query() ?: null;
+        $filters = $request->query();
         //dd($filters);
-        
-        $products = QueryBuilder::for(Club::class)
+
+        $data = QueryBuilder::for(Club::class)
             ->allowedFilters(['name', 'gender'])
-            ->paginate((int) $filters['page_size'] ?? 25)
-            ->appends(request()->query()); 
+            ->paginate($filters['page_size'] ?? 25)
+            ->appends(request()->query());
 
 
         return Inertia::render('clubs/index', [
-            "data" => $products,
-            'filters' => $filters
-            
+            'page' => ResponseHelper::formatResponse($data, $filters)
         ]);
     }
 

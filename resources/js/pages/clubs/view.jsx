@@ -59,7 +59,7 @@ const View = (props) => {
             ),
         },
         {
-            title: "Azioni",
+            
             key: "actions",
             align: "right",
             render: (record) => (
@@ -81,7 +81,7 @@ const View = (props) => {
     const navLinks = [
         {
             label: "Tot. Artisti",
-            value: data?.total_products || 0,
+            value: data?.total_events || 0,
             icon: <IconBox />,
             url: "/artists",
         }

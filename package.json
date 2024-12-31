@@ -6,8 +6,6 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@iconify-json/solar": "^1.2.2",
-        "@iconify/react": "^5.1.0",
         "axios": "^1.7.9",
         "laravel-vite-plugin": "^1.1",
         "tailwindcss": "^3.4.17",
@@ -21,7 +19,6 @@
         "antd": "^5.22.7",
         "autoprefixer": "^10.4.20",
         "dayjs": "^1.11.13",
-        "hugeicons-react": "^0.3.0",
         "jotai": "^2.11.0",
         "lodash": "^4.17.21",
         "postcss": "^8.4.49",

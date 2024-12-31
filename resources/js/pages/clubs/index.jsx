@@ -3,13 +3,14 @@ import { Avatar, Button, Divider, Space, Table } from "antd";
 
 import { Link } from "@inertiajs/react";
 import { dateTimeFormatter } from "@/helpers/formatter";
-import { IconEye } from "@tabler/icons-react";
+import { IconEye, IconPlus } from "@tabler/icons-react";
 import Datatable from "@/shared/datatable";
 import AppLayout from "@/layouts/app-layout";
-import { PlusSignIcon } from "hugeicons-react";
+
 
 const Clubs = (props) => {
-    const { data, filters, processing } = props;
+    const { page, processing } = props;
+    const { data, meta, filters } = page;
     //const [processing, setIsLoading] = useState(true);
     console.log("🌱 page:", props);
 
@@ -21,7 +22,7 @@ const Clubs = (props) => {
             filterSearch: true,
             render: (record) => (
                 <Link href={`/clubs/${record?.id}`}>
-                    <Space split={<Divider type="vertical" />}>
+                    <Space>
                         <Avatar
                             
                             shape="square"
@@ -47,15 +48,15 @@ const Clubs = (props) => {
             ),
         },
         {
-            title: "Tot. Artisti",
-            key: "total_products",
-            dataIndex: "total_products",
+            title: "Tot. Eventi",
+            key: "total_events",
+            dataIndex: "total_events",
             align: "right",
             filterSearch: true,
             sortable: true,
         },
         {
-            title: "Azioni",
+            
             key: "actions",
             align: "right",
             render: (record) => (
@@ -70,11 +71,11 @@ const Clubs = (props) => {
 
     return (
         <AppLayout
-            title={`Club (${data?.total})`}
+            title={`Club (${meta?.total})`}
             extra={
                 <Button
                     type="primary"
-                    icon={<PlusSignIcon size={22} />}
+                    icon={<IconPlus />}
                     onClick={() => togglePopup()}
                 >
                     Aggiungi
@@ -85,6 +86,7 @@ const Clubs = (props) => {
                 <Datatable
                     columns={columns}
                     data={data}
+                    meta={meta}
                     processing={processing}
                     initialFilters={filters}
                 />

@@ -3,9 +3,6 @@
 /* Import your modal components or other styles first */
 @import './components/modal';
 
-@layer tailwind-base {
-  @tailwind base;
-}
 
 @tailwind components;
 @tailwind utilities;
@@ -92,6 +89,9 @@ button.ant-btn.ant-btn-black {
 }
 .ant-btn.ant-btn-icon-only {
   width: 40px;
+}
+.ant-btn-icon * {
+  vertical-align: middle !important;
 }
 
 #side-nav li:last-of-type {

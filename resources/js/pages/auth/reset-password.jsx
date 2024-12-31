@@ -3,7 +3,7 @@ import AuthLayout from "@/layouts/auth-layout";
 import { Button, Form, Input, message } from "antd";
 import { Link, useForm } from "@inertiajs/react";
 
-const Login = (props) => {
+const ResetPassword = (props) => {
     const [form] = Form.useForm();
     const { data, setData, post, processing, errors } = useForm({
         email: "",
@@ -15,23 +15,25 @@ const Login = (props) => {
         setData(allValues); // Aggiorna i dati con i valori correnti del form
     };
 
-    console.log('form:', data);
-    
+    console.log("form:", data);
+
     // Gestione del submit
     const handleSubmit = () => {
-        console.log('form:', data);
+        console.log("form:", data);
         post("login", {
             onSuccess: () => {
                 message.success("Accesso effettuato con successo!");
             },
             onError: () => {
-                message.error("Errore nei dati di accesso, controlla e riprova.");
+                message.error(
+                    "Errore nei dati di accesso, controlla e riprova."
+                );
             },
         });
     };
 
     return (
-        <AuthLayout title="Accedi">
+        <AuthLayout title="Resetta password">
             <Form
                 layout="vertical"
                 autoComplete="off"
@@ -41,25 +43,21 @@ const Login = (props) => {
                 disabled={processing}
             >
                 <Form.Item
-                    label="Email"
-                    name="email"
-                    validateStatus={errors.email ? "error" : ""}
-                    help={errors.email || ""}
+                    label="Nuova password"
+                    name="password"
+                    validateStatus={errors.password ? "error" : ""}
+                    help={errors.password || ""}
                     rules={[
                         {
                             required: true,
-                            message: "Il campo email è obbligatorio.",
-                        },
-                        {
-                            type: "email",
-                            message: "Inserisci un'email valida.",
+                            message: "La password è obbligatoria.",
                         },
                     ]}
                 >
-                    <Input placeholder="Inserisci email" />
+                    <Input.Password placeholder="Inserisci la password" />
                 </Form.Item>
                 <Form.Item
-                    label="Password"
+                    label="Conferma nuova password"
                     name="password"
                     validateStatus={errors.password ? "error" : ""}
                     help={errors.password || ""}
@@ -79,17 +77,19 @@ const Login = (props) => {
                         block
                         loading={processing}
                     >
-                        Accedi
+                        Login
                     </Button>
                 </Form.Item>
             </Form>
             <div className="my-4 text-center">
-                <Link href="/forgot-password" target="_blank">
-                Password dimenticata?
+                <Link
+                    href="/login"
+                >
+                    Torna al login
                 </Link>
             </div>
         </AuthLayout>
     );
 };
 
-export default Login;
+export default ResetPassword;

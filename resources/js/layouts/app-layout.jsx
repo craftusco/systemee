@@ -3,12 +3,15 @@ import { Layout } from 'antd';
 const { Sider, Content } = Layout;
 import SideNav from '@/shared/partials/side-nav';
 import PageActions from '@/shared/components/page-actions';
+import { Head } from '@inertiajs/react';
 
 export default function AppLayout(props) {
   const { title, children } = props;
   const [collapsed, setCollapsed] = useState(false);
 
   return (
+    <>
+    <Head title={`${title} - Systemee`}/>
     <Layout hasSider className="main-layout">
       <Sider
         collapsed={collapsed}
@@ -36,5 +39,6 @@ export default function AppLayout(props) {
           </Content>
       </Layout>
     </Layout>
+    </>
   );
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseHelper;
 use App\Models\Artist;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,21 +12,17 @@ class ArtistController extends Controller
 {
     public function index(Request $request)
     {
-        $filters = $request->query() ?: [
-            'page_size' => $request['page_size'] || 25 
-        ];
+        $filters = $request->query();
         //dd($filters);
-        
-        $products = QueryBuilder::for(Artist::class)
+
+        $data = QueryBuilder::for(Artist::class)
             ->allowedFilters(['name', 'gender'])
-            ->paginate((int) $filters['page_size'])
-            ->appends(request()->query()); 
+            ->paginate($filters['page_size'] ?? 25)
+            ->appends(request()->query());
 
 
         return Inertia::render('artists/index', [
-            "data" => $products,
-            'filters' => $filters
-            
+            'page' => ResponseHelper::formatResponse($data, $filters)
         ]);
     }
 

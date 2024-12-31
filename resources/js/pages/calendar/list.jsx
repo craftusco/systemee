@@ -7,21 +7,19 @@ import {
     IconCloudUpload,
     IconDots,
     IconEye,
+    IconPlus,
+    IconPencilMinus,
+    IconTrash,
 } from "@tabler/icons-react";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
-import {
-    Delete02Icon,
-    Edit02Icon,
-    PencilEdit02Icon,
-    PlusSignIcon,
-} from "hugeicons-react";
 import ModalEvent from "@/shared/events/modal-event";
 
 const PageList = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
-    const { data, filters, processing } = props;
+    const { page, processing } = props;
+    const { data, meta, filters } = page;
     console.log("🌱 page:", props);
     const [selected, setSelected] = useState([]);
     // Toggle popup
@@ -47,7 +45,7 @@ const PageList = (props) => {
             ),
         },
         {
-            title: "Azioni",
+            
             key: "actions",
             sorter: false,
             align: "right",
@@ -68,7 +66,7 @@ const PageList = (props) => {
     const tableActions = [
         {
             key: 1,
-            icon: <PencilEdit02Icon size={22} />,
+            icon: <IconPencilMinus />,
             label: "Modifica",
         },
         {
@@ -77,7 +75,7 @@ const PageList = (props) => {
         {
             key: 2,
             danger: true,
-            icon: <Delete02Icon size={22} />,
+            icon: <IconTrash />,
             label: "Elimina",
             // onClick: async () => {
             //   if (selected?.user_id) {
@@ -99,11 +97,11 @@ const PageList = (props) => {
                 />
             )}
             <AppLayout
-                title={`Lista eventi (${data?.total})`}
+                title={`Lista eventi (${meta?.total})`}
                 extra={
                     <Button
                         type="primary"
-                        icon={<PlusSignIcon size={22} />}
+                        icon={<IconPlus />}
                         onClick={() => togglePopup()}
                     >
                         Aggiungi
@@ -111,12 +109,13 @@ const PageList = (props) => {
                 }
             >
                 <div className="data-content">
-                    <Datatable
-                        columns={columns}
-                        data={data}
-                        processing={processing}
-                        initialFilters={filters}
-                    />
+                <Datatable
+                    columns={columns}
+                    data={data}
+                    meta={meta}
+                    processing={processing}
+                    initialFilters={filters}
+                />
                 </div>
             </AppLayout>
         </>

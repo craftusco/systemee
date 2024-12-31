@@ -6,6 +6,7 @@ import HomeStats from "@/shared/home/stats";
 
 const PageIndex = (props) => {
     const { data } = props;
+    console.log("🌱 page:", props);
     const { isLoggedIn, user } = usePage().props.auth;
 
     return (

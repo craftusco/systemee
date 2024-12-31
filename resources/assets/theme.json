@@ -3,14 +3,14 @@
   "wirefreame": true, 
   "token": {
     "fontFamily": "'Inter', sans-serif",
+    "letterSpacing": 0.5,
     "colorPrimary": "#029182",    
     "colorSuccess": "#34C759",     
     "colorWarning": "#FF9500",     
     "colorError": "#FE5C5C",       
     "colorText": "#222",        
     "colorBgBase": "#fff",  
-    "borderRadius": 8,          
-    "controlHeight": 34,                 
+    "borderRadius": 8,                         
     "paddingContentHorizontal": 16,
     "paddingContentVertical": 10,
     "motionDurationMid": "0.15s"
@@ -27,9 +27,6 @@
       "titleMarginBottom": 0,
       "titleMarginTop": 0
     },
-    "Avatar": {
-      "colorTextPlaceholder": "#E8F3F1"
-    }, 
     "Button": {
       "colorLink": "#174a47",
       "bgDanger": "#e11719",
@@ -46,8 +43,8 @@
     },
     "Layout": {
       "bodyBg": "#fff",
-      "siderBg": "#1B1B1B",
-      "lightSiderBg": "#1B1B1B",
+      "siderBg": "#f4f5f5",
+      "lightSiderBg": "#f4f5f5",
       "headerHeight": 50,
       "footerPadding": 2,
       "headerBg": "#fff",
@@ -108,14 +105,7 @@
       "iconSize": 22,
       "collapsedIconSize": 22,
       "groupTitleLineHeight": 2,
-      "itemBg": "transparent",
-      "groupTitleColor": "#b6b6b6",
-      "itemColor": "#b6b6b6",
-      "itemActiveColor": "#fff",
-      "itemHoverColor": "#fff",
-      "itemHoverBg": "#323232",
-      "itemSelectedBg": "#323232",
-      "itemSelectedColor": "#fff"
+      "itemBg": "transparent"
     }
   }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseHelper;
 use App\Models\Artist;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,18 +12,17 @@ class RequestController extends Controller
 {
     public function index(Request $request)
     {
-        $filters = $request->query() ?: null;
+        $filters = $request->query();
         //dd($filters);
         
-        $requests = QueryBuilder::for(Artist::class)
+        $data = QueryBuilder::for(Artist::class)
             ->allowedFilters(['name', 'gender'])
-            ->paginate((int) $filters['page_size'] ?? 25)
+            ->paginate($filters['page_size'] ?? 25)
             ->appends(request()->query()); 
 
 
         return Inertia::render('requests/index', [
-            "data" => $requests,
-            'filters' => $filters
+            'page' => ResponseHelper::formatResponse($data, $filters)
             
         ]);
     }
