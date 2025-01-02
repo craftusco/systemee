@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
-use App\Models\User;
+use App\Models\EventType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -14,9 +14,8 @@ class EventTypeController extends Controller
     {
 
         $filters = $request->query();
-        
-        $data = QueryBuilder::for(User::class)
-            ->allowedFilters(['name'])
+
+        $data = QueryBuilder::for(EventType::class)
             ->paginate($filters['page_size'] ?? 25)
             ->appends(request()->query());
 

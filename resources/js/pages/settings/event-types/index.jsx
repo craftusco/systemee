@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button, Divider, Dropdown, Space } from "antd";
+import { Avatar, Button, ColorPicker, Divider, Dropdown, Space, Tag } from "antd";
 import { Link, usePage } from "@inertiajs/react";
 
 import {
@@ -15,8 +15,9 @@ import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
 
 const PageEventTypes = (props) => {
-    const { data, meta, filters, processing } = props;
-    console.log("🌱 page:", props);
+    const { page, processing } = props;
+    const { data, meta, filters } = page;
+    console.log("🌱 page.event-types.index:", props);
     const [selected, setSelected] = useState([]);
     // Toggle popup
     const togglePopup = (record = null) => {
@@ -26,45 +27,16 @@ const PageEventTypes = (props) => {
 
     const columns = [
         {
-            title: "Nome",
-            key: "name",
-            filterable: true,
-            sorter: (a, b) => a.name - b.name,
-            render: (record) => (
-                <Link href={`/artists/${record?.id}`}>
-                    <Space>
-                        <Avatar
-                            shape="square"
-                            icon={<IconUserFilled />}
-                        />
-                        <span>{record?.name}</span>
-                    </Space>
-                </Link>
-            ),
+            title: "Titolo",
+            key: "title",
+            dataIndex: "title",
         },
         {
-            title: "Tot eventi",
-            type: "number",
-            key: "total_events",
-        },
-        {
-            title: "Ruoli",
-            key: "roles",
-            render: (record) => (
-                <>
-                    {record?.roles?.map((role) => (
-                        <Tag key={role?.id}>{role?.name}</Tag>
-                    ))}
-                </>
-            ),
-        },        
-        {
-            title: "Data creazione",
-            key: "created_at",
-            type: "datetime",
-            sorter: (a, b) => a.created_at - b.created_at,
-            render: (record) => (
-                <span>{dateTimeFormatter(record?.created_at)}</span>
+            title: "Colore",
+            type: "color",
+            key: "color",
+            render: ({color}) => (
+                <Tag color={color}>{color}</Tag>
             ),
         },
         {
@@ -131,6 +103,7 @@ const PageEventTypes = (props) => {
                     meta={meta}
                     processing={processing}
                     initialFilters={filters}
+                    showFilters={false}
                 />
             </div>
         </AppLayout>

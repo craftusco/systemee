@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SettingsController;
@@ -73,6 +74,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
             Route::post('/create', [RoleController::class, 'store'])->name('roles.store');
             Route::get('/{id}', [RoleController::class, 'view'])->name('roles.view');
+        }); 
+        // Event types 
+        Route::prefix('event-types')->name('settings')->group(function () {
+            Route::get('/', [EventTypeController::class, 'page'])->name('event-types.index');
+            Route::post('/create', [EventTypeController::class, 'store'])->name('event-types.store');
+            Route::get('/{id}', [EventTypeController::class, 'view'])->name('event-types.view');
         });
     });
 });

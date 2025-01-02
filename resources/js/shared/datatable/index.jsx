@@ -12,6 +12,7 @@ import ModalFilters from "./filters/modal-filters";
 
 const Datatable = ({
     columns,
+    showFilters = true,
     data = {},
     meta = {},
     initialFilters = {},
@@ -55,17 +56,22 @@ const Datatable = ({
     return (
         <>
             {modalFilters && (
-                <ModalFilters isOpened={modalFilters} onClose={() => setModalFilters(!modalFilters)} />
+                <ModalFilters
+                    isOpened={modalFilters}
+                    onClose={() => setModalFilters(!modalFilters)}
+                />
             )}
-            <div className="flex justify-between items-center gap-4 mb-1">
-                <Input placeholder="Cerca qui" />
-                <Button
-                    icon={<IconAdjustments />}
-                    onClick={() => setModalFilters(!modalFilters)}
-                >
-                    Filtri
-                </Button>
-            </div>
+            {showFilters && (
+                <div className="flex justify-between items-center gap-4 mb-1">
+                    <Input placeholder="Cerca qui" />
+                    <Button
+                        icon={<IconAdjustments />}
+                        onClick={() => setModalFilters(!modalFilters)}
+                    >
+                        Filtri
+                    </Button>
+                </div>
+            )}
             <Table
                 columns={columns}
                 dataSource={data || []}
