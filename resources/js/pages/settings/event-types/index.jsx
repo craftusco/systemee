@@ -91,6 +91,7 @@ const PageEventTypes = (props) => {
             key: 1,
             icon: <IconPencilMinus/>,
             label: "Modifica",
+            onClick: () => togglePopup(),
         },
         {
             type: "divider",

@@ -56,6 +56,7 @@ const View = (props) => {
         {
           onClick: () => setModal(!modal),
           label: "Modifica",
+          onClick: () => router.visit(`/requests/${selected?.id}`),
         },
         {
           type: "divider",

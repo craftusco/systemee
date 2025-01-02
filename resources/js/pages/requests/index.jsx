@@ -87,6 +87,7 @@ const Products = (props) => {
             key: 1,
             icon: <IconPencilMinus/>,
             label: "Modifica",
+            onClick: () => router.visit(`/requests/${selected?.id}`),
         },
         {
             type: "divider",

@@ -68,6 +68,7 @@ const PageList = (props) => {
             key: 1,
             icon: <IconPencilMinus />,
             label: "Modifica",
+            onClick: () => router.visit(`/events/${selected?.id}`),
         },
         {
             type: "divider",

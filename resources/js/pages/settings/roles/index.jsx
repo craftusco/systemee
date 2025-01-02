@@ -20,7 +20,6 @@ const Roles = (props) => {
     console.log("🌱 page.roles.index:", props);
     const [selected, setSelected] = useState(null);
 
-
     const columns = [
         {
             title: "Nome",
@@ -74,7 +73,7 @@ const Roles = (props) => {
             key: 1,
             icon: <IconPencilMinus />,
             label: "Modifica",
-            onClick: () => router.push(`/settings/roles/${selected?.id}`),
+            onClick: () => router.visit(`/settings/roles/${selected?.id}`),
         },
         {
             type: "divider",
@@ -98,15 +97,11 @@ const Roles = (props) => {
         <AppLayout
             title={`Ruoli utenti (${meta?.total})`}
             extra={
-                <Button
-                    type="primary"
-                    as={Link}
-                    href="/settings/roles/create"
-                    icon={<IconPlus />}
-                    onClick={() => togglePopup()}
-                >
-                    Aggiungi
-                </Button>
+                <Link href="/settings/roles/create">
+                    <Button type="primary" icon={<IconPlus />}>
+                        Aggiungi
+                    </Button>
+                </Link>
             }
         >
             <div className="data-content">

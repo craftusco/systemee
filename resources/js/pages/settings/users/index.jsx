@@ -32,7 +32,7 @@ const Users = (props) => {
             filterable: true,
             sorter: (a, b) => a.name - b.name,
             render: (record) => (
-                <Link href={`/artists/${record?.id}`}>
+                <Link href={`/settings/users/${record?.id}`}>
                     <Space>
                         <Avatar
                             shape="square"
@@ -92,6 +92,7 @@ const Users = (props) => {
             key: 1,
             icon: <IconPencilMinus/>,
             label: "Modifica",
+            onClick: () => router.visit(`/settings/users/${selected?.id}`),
         },
         {
             type: "divider",

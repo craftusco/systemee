@@ -82,6 +82,7 @@ const Artists = (props) => {
             key: 1,
             icon: <IconPencilMinus />,
             label: "Modifica",
+            onClick: () => router.visit(`/artists/${selected?.id}`),
         },
         {
             type: "divider",
