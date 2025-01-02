@@ -44,9 +44,9 @@ const Users = (props) => {
             ),
         },
         {
-            title: "Tot eventi",
-            type: "number",
-            key: "total_events",
+            title: "Email",
+            key: "email",
+            dataIndex: "email",
         },
         {
             title: "Ruoli",
@@ -60,10 +60,10 @@ const Users = (props) => {
             ),
         },        
         {
-            title: "Data creazione",
+            title: "Creato il",
             key: "created_at",
             type: "datetime",
-            sorter: (a, b) => a.created_at - b.created_at,
+            align: "right",
             render: (record) => (
                 <span>{dateTimeFormatter(record?.created_at)}</span>
             ),
@@ -115,6 +115,7 @@ const Users = (props) => {
     return (
         <AppLayout
             title={`Utenti (${meta?.total})`}
+            backLink="/settings"
             extra={
                 <Button
                     type="primary"

@@ -36,10 +36,10 @@ const PageList = (props) => {
             dataIndex: "title",
         },
         {
-            title: "Data creazione",
+            title: "Creato il",
             key: "created_at",
             type: "datetime",
-            sorter: (a, b) => a.created_at - b.created_at,
+            align: "right",
             render: (record) => (
                 <span>{dateTimeFormatter(record?.created_at)}</span>
             ),

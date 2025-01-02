@@ -5,14 +5,14 @@ import { Link, router } from "@inertiajs/react";
 const { Text, Title } = Typography;
 
 const PageActions = (props) => {
-    const { backUrl, subTitle, title, extra } = props;
+    const { backLink, subTitle, title, extra } = props;
     return (
         <div className={`page-heading mb-1`}>
             <Flex align="middle" justify="space-between" key={`row-` + 0}>
                 <div key={`col-` + 0}>
                     <Space align="start">
-                        {backUrl && (
-                            <Link href={backUrl}>
+                        {backLink && (
+                            <Link href={backLink}>
                                 <Button
                                     icon={
                                         <IconChevronLeft />

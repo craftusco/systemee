@@ -8,10 +8,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/it";
 import it_IT from "antd/locale/it_IT";
 
-const appName = import.meta.env.VITE_APP_NAME;
-
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
     progress: {
         color: "#1677ff",
         showSpinner: true,

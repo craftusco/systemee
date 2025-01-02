@@ -20,7 +20,7 @@ import {
     IconTrash,
 } from "@tabler/icons-react";
 import { useAtom } from "jotai";
-import FormBody from "@/shared/artists/form-body";
+import FormBody from "@/modules/artists/form-body";
 import AppLayout from "@/layouts/app-layout";
 
 const View = (props) => {
@@ -81,7 +81,7 @@ const View = (props) => {
 
     return (
         <AppLayout 
-                    backUrl="/artists"
+                    backLink="/artists"
                     title={`Artista - ${data?.name}`}
                     subTitle={`Club - ${data?.created_at}`}
                     extra={

@@ -4,7 +4,7 @@
   "token": {
     "fontFamily": "'Inter', sans-serif",
     "letterSpacing": 0.5,
-    "colorPrimary": "#029182",    
+    "colorPrimary": "#1677ff",    
     "colorSuccess": "#34C759",     
     "colorWarning": "#FF9500",     
     "colorError": "#FE5C5C",       

@@ -10,7 +10,7 @@ const RoleView = (props) => {
     return (
         <AppLayout
             title={`Modifica ruolo - Amministratore`}
-            backUrl="/settings/roles"
+            backLink="/settings/roles"
             extra={
                 <Button
                     type="primary"

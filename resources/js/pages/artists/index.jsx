@@ -17,11 +17,6 @@ const Artists = (props) => {
     const { data, meta, filters } = page;
     console.log("🌱 page:", props);
     const [selected, setSelected] = useState([]);
-    // Toggle popup
-    const togglePopup = (record = null) => {
-        setSelected(record);
-        setIsOpen(!isOpen);
-    };
 
     const columns = [
         {
@@ -52,10 +47,10 @@ const Artists = (props) => {
             key: "price",
         },
         {
-            title: "Data creazione",
+            title: "Creato il",
             key: "created_at",
             type: "datetime",
-            sorter: (a, b) => a.created_at - b.created_at,
+            align: "right",
             render: (record) => (
                 <span>{dateTimeFormatter(record?.created_at)}</span>
             ),

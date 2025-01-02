@@ -79,7 +79,8 @@ const PageEventTypes = ({ page, processing }) => {
                 initialData={selected}
             />
             <AppLayout
-                title="Tipologie eventi"
+                title={`Tipologie eventi (${meta?.total})`}
+                backLink="/settings"
                 extra={
                     <Button
                         type="primary"

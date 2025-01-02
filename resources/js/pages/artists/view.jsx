@@ -64,7 +64,7 @@ const View = (props) => {
 
     return (
         <AppLayout
-            backUrl="/artists"
+            backLink="/artists"
             title={`Artista - ${data?.name}`}
             subTitle={`Creato il - ${dateFormatter(data?.created_at)}`}
             extra={

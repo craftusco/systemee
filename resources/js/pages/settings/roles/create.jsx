@@ -10,7 +10,7 @@ const RoleCreate = (props) => {
     return (
         <AppLayout
             title="Crea ruolo utenti"
-            backUrl="/settings/roles"
+            backLink="/settings/roles"
             extra={
                 <Button
                     type="primary"

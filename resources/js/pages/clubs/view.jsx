@@ -51,9 +51,9 @@ const View = (props) => {
             ),
         },
         {
-            title: "Data creazione",
+            title: "Creato il",
             key: "created_at",
-            sorter: (a, b) => a.created_at - b.created_at,
+            align: "right",
             render: (record) => (
                 <span>{dateTimeFormatter(record?.created_at)}</span>
             ),
@@ -103,7 +103,7 @@ const View = (props) => {
     };
 
     return (
-        <AppLayout backUrl="/clubs"
+        <AppLayout backLink="/clubs"
                 title={
                     <>
                         {" "}

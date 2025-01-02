@@ -41,11 +41,10 @@ const Roles = (props) => {
             key: "total_events",
         },
         {
-            title: "Data creazione",
+            title: "Creato il",
             key: "created_at",
             type: "datetime",
             align: "right",
-            sorter: (a, b) => a.created_at - b.created_at,
             render: (record) => (
                 <span>{dateTimeFormatter(record?.created_at)}</span>
             ),
@@ -96,6 +95,7 @@ const Roles = (props) => {
     return (
         <AppLayout
             title={`Ruoli utenti (${meta?.total})`}
+            backLink="/settings"
             extra={
                 <Link href="/settings/roles/create">
                     <Button type="primary" icon={<IconPlus />}>
