@@ -6,6 +6,8 @@ use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -29,6 +31,52 @@ class RoleController extends Controller
         ]);
     }
 
+    public function create(): Response
+    {
+        $permissions = [
+            [
+                "pageName" => "Utenti",
+                "permissions" => [
+                    "create" => false,
+                    "read" => true,
+                    "update" => false,
+                    "delete" => false,
+                ]
+            ],
+            [
+                "pageName" => "Club",
+                "permissions" => [
+                    "create" => false,
+                    "read" => true,
+                    "update" => false,
+                    "delete" => false,
+                ]
+            ],
+            [
+                "pageName" => "Artisti",
+                "permissions" => [
+                    "create" => true,
+                    "read" => true,
+                    "update" => true,
+                    "delete" => true,
+                ]
+            ],
+            [
+                "pageName" => "Richieste",
+                "permissions" => [
+                    "create" => false,
+                    "read" => true,
+                    "update" => true,
+                    "delete" => false,
+                ]
+            ]
+        ];
+
+        return Inertia::render('settings/roles/create', [
+            'data' => $permissions
+        ]);
+    }
+
     public function store(Request $request)
     {
         $store = Role::create([
@@ -38,6 +86,52 @@ class RoleController extends Controller
 
         return redirect()->route('')->with('success', '
                 Role created successfully');
+    }
+
+    public function view(): Response
+    {
+        $permissions = [
+            [
+                "pageName" => "Utenti",
+                "permissions" => [
+                    "create" => false,
+                    "read" => true,
+                    "update" => false,
+                    "delete" => false,
+                ]
+            ],
+            [
+                "pageName" => "Club",
+                "permissions" => [
+                    "create" => false,
+                    "read" => true,
+                    "update" => false,
+                    "delete" => false,
+                ]
+            ],
+            [
+                "pageName" => "Artisti",
+                "permissions" => [
+                    "create" => true,
+                    "read" => true,
+                    "update" => true,
+                    "delete" => true,
+                ]
+            ],
+            [
+                "pageName" => "Richieste",
+                "permissions" => [
+                    "create" => false,
+                    "read" => true,
+                    "update" => true,
+                    "delete" => false,
+                ]
+            ]
+        ];
+
+        return Inertia::render('settings/roles/view', [
+            'data' => $permissions
+        ]);
     }
 
 }

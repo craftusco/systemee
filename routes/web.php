@@ -61,16 +61,18 @@ Route::middleware(['auth'])->group(function () {
 
     // Settings
     Route::prefix('settings')->name('settings')->group(function () {
-        Route::get('/', [SettingsController::class, 'page'])->name('page');
+        Route::get('/', [SettingsController::class, 'page'])->name('settings.page');
         // Settings Users
         Route::prefix('users')->name('settings')->group(function () {
-            Route::get('/', [UserController::class, 'page'])->name('page');
-            Route::get('/{slug}', [UserController::class, 'view'])->name('view');
+            Route::get('/', [UserController::class, 'page'])->name('users.index');
+            Route::get('/{slug}', [UserController::class, 'view'])->name('users.view');
         });
         // Settings Roles
         Route::prefix('roles')->name('settings')->group(function () {
-            Route::get('/', [RoleController::class, 'page'])->name('page');
-            Route::get('/{slug}', [RoleController::class, 'view'])->name('view');
+            Route::get('/', [RoleController::class, 'page'])->name('roles.index');
+            Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
+            Route::post('/create', [RoleController::class, 'store'])->name('roles.store');
+            Route::get('/{id}', [RoleController::class, 'view'])->name('roles.view');
         });
     });
 });

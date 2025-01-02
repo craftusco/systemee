@@ -14,9 +14,8 @@ import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
 
-const Users = (props) => {
-    const { page } = props;
-    const { data, meta, filters, processing } = page;
+const PageEventTypes = (props) => {
+    const { data, meta, filters, processing } = props;
     console.log("🌱 page:", props);
     const [selected, setSelected] = useState([]);
     // Toggle popup
@@ -113,7 +112,7 @@ const Users = (props) => {
 
     return (
         <AppLayout
-            title={`Utenti (${meta?.total})`}
+            title={`Tipologie eventi`}
             extra={
                 <Button
                     type="primary"
@@ -137,4 +136,4 @@ const Users = (props) => {
     );
 };
 
-export default Users;
+export default PageEventTypes;

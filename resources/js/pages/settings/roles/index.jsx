@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, Button, Divider, Dropdown, Space } from "antd";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 
 import {
-    IconAlertCircle,
-    IconCloudUpload,
     IconDots,
-    IconEye,
-    IconTrash, IconPencilMinus, IconPlus
+    IconTrash,
+    IconPencilMinus,
+    IconPlus,
+    IconLockAccess,
 } from "@tabler/icons-react";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
+import { handleDelete } from "@/lib/actions/delete-role";
 
 const Roles = (props) => {
-    const { data, meta, filters, processing } = props;
-    console.log("🌱 page:", props);
-    const [selected, setSelected] = useState([]);
-    // Toggle popup
-    const togglePopup = (record = null) => {
-        setSelected(record);
-        setIsOpen(!isOpen);
-    };
+    const { page, processing } = props;
+    const { data, meta, filters } = page;
+    console.log("🌱 page.roles.index:", props);
+    const [selected, setSelected] = useState(null);
+
 
     const columns = [
         {
@@ -30,39 +28,30 @@ const Roles = (props) => {
             filterable: true,
             sorter: (a, b) => a.name - b.name,
             render: (record) => (
-                <Link href={`/artists/${record?.id}`}>
+                <Link href={`/settings/roles/${record?.id}`}>
                     <Space>
-                        <Avatar
-                            
-                            shape="square"
-                            src={record?.iamge || "/images/placeholder.svg"}
-                        />
+                        <Avatar shape="square" icon={<IconLockAccess />} />
                         <span>{record?.name}</span>
                     </Space>
                 </Link>
             ),
         },
         {
-            title: "Tot eventi",
-            type: "number",
+            title: "Descrizione",
+            type: "text",
             key: "total_events",
-        },
-        {
-            title: "Prezzi",
-            type: "number",
-            key: "price",
         },
         {
             title: "Data creazione",
             key: "created_at",
             type: "datetime",
+            align: "right",
             sorter: (a, b) => a.created_at - b.created_at,
             render: (record) => (
                 <span>{dateTimeFormatter(record?.created_at)}</span>
             ),
         },
         {
-            
             key: "actions",
             sorter: false,
             align: "right",
@@ -83,8 +72,9 @@ const Roles = (props) => {
     const tableActions = [
         {
             key: 1,
-            icon: <IconPencilMinus/>,
+            icon: <IconPencilMinus />,
             label: "Modifica",
+            onClick: () => router.push(`/settings/roles/${selected?.id}`),
         },
         {
             type: "divider",
@@ -92,25 +82,27 @@ const Roles = (props) => {
         {
             key: 2,
             danger: true,
-            icon: <IconTrash/>,
+            icon: <IconTrash />,
             label: "Elimina",
-            // onClick: async () => {
-            //   if (selected?.user_id) {
-            //     handleDelete(selected?.user_id);
-            //   } else {
-            //     console.error('documentId is undefined');
-            //   }
-            // },
+            onClick: async () => {
+                if (selected) {
+                    handleDelete(selected?.user_id);
+                } else {
+                    console.error("documentId is undefined");
+                }
+            },
         },
     ];
 
     return (
         <AppLayout
-            title={`Artisti (${meta?.total})`}
+            title={`Ruoli utenti (${meta?.total})`}
             extra={
                 <Button
                     type="primary"
-                    icon={<IconPlus/>}
+                    as={Link}
+                    href="/settings/roles/create"
+                    icon={<IconPlus />}
                     onClick={() => togglePopup()}
                 >
                     Aggiungi
@@ -121,6 +113,7 @@ const Roles = (props) => {
                 <Datatable
                     columns={columns}
                     data={data}
+                    meta={meta}
                     processing={processing}
                     initialFilters={filters}
                 />

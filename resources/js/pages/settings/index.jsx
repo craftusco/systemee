@@ -4,12 +4,11 @@ const { Meta } = Card;
 const { Text, Title } = Typography;
 import { Link } from "@inertiajs/react";
 import AppLayout from "@/layouts/app-layout";
-import SettingsLayout from "@/layouts/settings-layout";
 import { settingLinks } from "@/shared/settings/nav-links";
 
 const PageSettings = (props) => {
     return (
-        <SettingsLayout title="Impostazioni">
+        <AppLayout title="Impostazioni">
             {settingLinks.map((section, i) => (
                 <Row gutter={[16, 16]} key={i} className="mb-4">
                     <Col key={i} span={24}>
@@ -40,7 +39,7 @@ const PageSettings = (props) => {
                     ))}
                 </Row>
             ))}
-        </SettingsLayout>
+        </AppLayout>
     );
 };
 

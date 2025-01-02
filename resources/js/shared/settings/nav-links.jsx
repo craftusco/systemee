@@ -1,4 +1,4 @@
-import { Icon123, IconLockAccess, IconUsers } from "@tabler/icons-react";
+import { Icon123, IconCalendar, IconLockAccess, IconTicket, IconUsers } from "@tabler/icons-react";
 
 export const settingLinks = [
   {
@@ -18,13 +18,24 @@ export const settingLinks = [
       },
     ]},
     {
+      title: "Generale",
+      items: [
+      {
+        label: "Tipologie eventi",
+        description: "Modifica le tipologie di eventi",
+        icon: <IconTicket/>,
+        url: "/settings/event-types",
+      }
+    ],
+  },
+  {
       title: "Altro",
       items: [
       {
         label: "Activity viewer",
         description: "Activity reports overview",
         icon: <Icon123/>,
-        url: "/reports/activity",
+        url: "/settings/activity",
       }
     ],
   }

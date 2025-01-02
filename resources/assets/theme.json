@@ -32,8 +32,8 @@
       "bgDanger": "#e11719",
       "controlOutline": 0
     },
-    "Space": {
-      "paddingXS": 2
+    "Checkbox": {
+      "controlInteractiveSize": 18
     },
     "Statistic": {
       "contentFontSize": 16

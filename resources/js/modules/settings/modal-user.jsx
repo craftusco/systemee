@@ -14,7 +14,7 @@ import * as dayjs from "dayjs";
 import { useForm } from "@inertiajs/react";
 const { TextArea } = Input;
 
-const ModalFilters = (props) =>{
+const ModalUser = (props) =>{
   const { isOpened, onClose, initialData } = props;
   const { data, setData, post, processing } = useForm({
     title: "",
@@ -99,4 +99,4 @@ const ModalFilters = (props) =>{
   );
 }
 
-export default ModalFilters;
+export default ModalUser;

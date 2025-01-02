@@ -28,7 +28,6 @@ const ConfirmModal = ({
     <Space className="flex items-center mx-auto justify-center gap-5 w-full">
       {cancelText && (
         <Button
-          shape="round"
           onClick={() => onClose(false)}
           disabled={isPending}
           loading={isPending}
@@ -39,7 +38,6 @@ const ConfirmModal = ({
       <Button
         danger={isDanger || isDelete}
         type="primary"
-        shape="round"
         onClick={handleOk}
         disabled={isPending}
         loading={isPending}

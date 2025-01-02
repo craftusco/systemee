@@ -13,7 +13,7 @@ import ModalFilters from "./filters/modal-filters";
 const Datatable = ({
     columns,
     data = {},
-    meta,
+    meta = {},
     initialFilters = {},
     ...props
 }) => {

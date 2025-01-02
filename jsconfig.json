@@ -4,6 +4,7 @@
     "baseUrl": "./resources/js",
     "paths": {
       "@/assets/*": ["/../assets/*"], 
+      "@/*": ["/*"],
       "@/shared/*": ["shared/*"],
       "@/pages/*": ["pages/*"],
       "@/lib/*": ["lib/*"],

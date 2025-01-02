@@ -14,15 +14,14 @@ const PageActions = (props) => {
                         {backUrl && (
                             <Link href={backUrl}>
                                 <Button
-                                    size="icon"
                                     icon={
-                                        <IconChevronLeft className="anticon" />
+                                        <IconChevronLeft />
                                     }
                                 />
                             </Link>
                         )}
                         <div>
-                            <Title level={3}>{title}</Title>
+                            <Title level={3} className="mt-0">{title}</Title>
                             {subTitle && (
                                 <div>
                                     <Text type="secondary">

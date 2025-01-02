@@ -8,7 +8,9 @@
 @tailwind utilities;
 
 
-
+html, body {
+  margin: 0;
+}
 mark, .ant-typography mark {
   background: #E8F3F1 !important;
   border-radius: 4px !important;

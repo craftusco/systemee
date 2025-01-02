@@ -14,7 +14,7 @@ import * as dayjs from "dayjs";
 import { useForm } from "@inertiajs/react";
 const { TextArea } = Input;
 
-const ModalFilters = (props) =>{
+const ModalEventType = (props) =>{
   const { isOpened, onClose, initialData } = props;
   const { data, setData, post, processing } = useForm({
     title: "",
@@ -22,7 +22,6 @@ const ModalFilters = (props) =>{
 });
 
   const [form] = Form.useForm();
-  const [formTouched, setFormTouched] = useState(false);
 //   const mutation = initialData ? useUpdate() : useCreate();
 
    // Gestione del submit
@@ -69,7 +68,6 @@ const ModalFilters = (props) =>{
         form={form}
         onFinish={handleSubmit}
         disabled={processing}
-        onValuesChange={() => setFormTouched(true)}
       >
         <Form.Item
           label="Titolo"
@@ -99,4 +97,4 @@ const ModalFilters = (props) =>{
   );
 }
 
-export default ModalFilters;
+export default ModalEventType;

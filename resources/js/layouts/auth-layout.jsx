@@ -6,7 +6,7 @@ import { IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
 
 const AuthLayout = (props) => {
-  const { children, title, subtitle, backLink } = props;
+  const { children, title, subtitle, backUrl } = props;
   const { isMobile } = useDevice();
 
   return (
