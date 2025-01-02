@@ -1,102 +1,98 @@
 "use client";
 import React, { useState } from "react";
 import {
-  Button,
-  Modal,
-  Form,
-  Input,
-  Flex,
-  DatePicker,
-  Drawer,
-  Space,
+    Button,
+    Drawer,
+    Form,
+    Input,
+    DatePicker,
+    InputNumber,
+    Space,
+    message,
+    Slider,
 } from "antd";
-import * as dayjs from "dayjs";
 import { useForm } from "@inertiajs/react";
-const { TextArea } = Input;
 
-const ModalFilters = (props) =>{
-  const { isOpened, onClose, initialData } = props;
-  const { data, setData, post, processing } = useForm({
-    title: "",
-    descripton: "",
-});
+const ModalFilters = ({ isOpened, onClose, columns }) => {
+    const { post, processing } = useForm({});
+    const [form] = Form.useForm();
+    const [formTouched, setFormTouched] = useState(false);
 
-  const [form] = Form.useForm();
-  const [formTouched, setFormTouched] = useState(false);
-//   const mutation = initialData ? useUpdate() : useCreate();
+    // Filter only columns that are filterable
+    const filterableColumns = columns.filter((col) => col.filterable);
 
-   // Gestione del submit
-   const handleSubmit = () => {
-    console.log('form:', data);
-    post("login", {
-        onSuccess: () => {
-            message.success("Accesso effettuato con successo!");
-        },
-        onError: () => {
-            message.error("Errore nei dati di accesso, controlla e riprova.");
-        },
-    });
+    // Helper function to render input components based on column type
+    const getInputComponent = (type) => {
+        switch (type) {
+            case "number":
+                return <InputNumber/>;
+            case "range":
+                return <Slider />;
+            case "datetime":
+                return (
+                    <DatePicker
+                        showTime
+                        format="DD-MM-YYYY HH:mm"
+                        style={{ width: "100%" }}
+                    />
+                );
+            default:
+                return <Input allowClear />;
+        }
+    };
+
+    const handleSubmit = (values) => {
+        console.log("Form values:", values);
+        post("login", {
+            data: values,
+            onSuccess: () => message.success("Filters applied successfully!"),
+            onError: () => message.error("Error applying filters. Please try again."),
+        });
+    };
+
+    return (
+        <Drawer
+            key="drawer-filters"
+            open={isOpened}
+            width={500}
+            onClose={onClose}
+            title="Apply Filters"
+            extra={
+                <Space>
+                    <Button type="default" onClick={onClose}>
+                        Close
+                    </Button>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        form="form-filters"
+                        loading={processing}
+                        disabled={!formTouched || processing}
+                    >
+                        Apply Filters
+                    </Button>
+                </Space>
+            }
+        >
+            <Form
+                layout="vertical"
+                name="form-filters"
+                form={form}
+                onFinish={handleSubmit}
+                onValuesChange={() => setFormTouched(true)}
+            >
+                {filterableColumns.map((col) => (
+                    <Form.Item
+                        key={col.key}
+                        label={col.title}
+                        name={col.key}
+                    >
+                        {getInputComponent(col.type)}
+                    </Form.Item>
+                ))}
+            </Form>
+        </Drawer>
+    );
 };
-
-  return (
-    <Drawer
-      key="drawer-filters"
-      open={isOpened}
-      size="large"
-      onClose={onClose}
-      title="Applica filtri"
-      extra={
-        <Space>
-          <Button type="default" onClick={onClose}>
-            Chiudi
-          </Button>
-          <Button
-            type="primary"
-            htmlType="submit"
-            aria-label="Applica"
-            form="form-reminder"
-            loading={processing}
-            disabled={!formTouched || processing}
-          >
-            Applica
-          </Button>
-        </Space>
-      }
-    >
-      <Form
-        layout="vertical"
-        name="form-reminder"
-        form={form}
-        onFinish={handleSubmit}
-        disabled={processing}
-        onValuesChange={() => setFormTouched(true)}
-      >
-        <Form.Item
-          label="Titolo"
-          name="title"
-          initialValue={initialData?.title}
-          rules={[{ required: true, message: "Il campo è obbligatorio" }]}
-        >
-          <Input allowClear/>
-        </Form.Item>
-        <Form.Item
-          label="Data e ora"
-          name="date"
-          rules={[{ required: true, message: "Il campo è obbligatorio" }]}
-        >
-          <DatePicker showTime placement="topRight" format="DD-MM-YYYY HH:mm" minuteStep={10} hourStep={1} />
-        </Form.Item>
-
-        <Form.Item
-          label="Descrizione"
-          name="content"
-          initialValue={initialData?.content}
-        >
-          <TextArea rows={6} placeholder="Descrivi l'attività" allowClear />
-        </Form.Item>
-      </Form>
-    </Drawer>
-  );
-}
 
 export default ModalFilters;

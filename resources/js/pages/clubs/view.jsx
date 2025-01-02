@@ -36,7 +36,7 @@ const View = (props) => {
         {
             title: "Nome",
             key: "name",
-            sorter: (a, b) => a.name - b.name,
+            
             render: (record) => (
                 <Link href={`/artists/${record?.id}`}>
                     <Space>

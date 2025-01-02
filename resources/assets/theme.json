@@ -10,7 +10,8 @@
     "colorError": "#FE5C5C",       
     "colorText": "#222",        
     "colorBgBase": "#fff",  
-    "borderRadius": 8,                         
+    "borderRadius": 8, 
+    "controlHeight": 30,                       
     "paddingContentHorizontal": 16,
     "paddingContentVertical": 10,
     "motionDurationMid": "0.15s"
@@ -42,9 +43,9 @@
       "headerBg": "#fff"
     },
     "Layout": {
-      "bodyBg": "#fff",
-      "siderBg": "#f4f5f5",
-      "lightSiderBg": "#f4f5f5",
+      "bodyBg": "#f4f5f5",
+      "siderBg": "#fff",
+      "lightSiderBg": "#fff",
       "headerHeight": 50,
       "footerPadding": 2,
       "headerBg": "#fff",

@@ -91,7 +91,7 @@ const PageEventTypes = ({ page, processing }) => {
                     </Button>
                 }
             >
-                <div className="data-content">
+               
                     <Datatable
                         columns={columns}
                         data={data}
@@ -100,7 +100,7 @@ const PageEventTypes = ({ page, processing }) => {
                         initialFilters={filters}
                         showFilters={false}
                     />
-                </div>
+               
             </AppLayout>
         </>
     );

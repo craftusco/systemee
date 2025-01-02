@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button, Divider, Dropdown, Space } from "antd";
-import { Link, usePage } from "@inertiajs/react";
-
+import { Button, Dropdown, Space, Tag } from "antd";
 import {
-    IconAlertCircle,
-    IconCloudUpload,
     IconDots,
-    IconEye,
-    IconTrash, IconPencilMinus, IconPlus,
-    IconMessage
+    IconTrash,
+    IconPencilMinus,
+    IconChecklist,
 } from "@tabler/icons-react";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
+import { getPriority } from "@/utils/enums";
 
-const Products = (props) => {
+const PageInbox = (props) => {
     const { page, processing } = props;
     const { data, meta, filters } = page;
     console.log("🌱 page:", props);
@@ -27,57 +24,39 @@ const Products = (props) => {
 
     const columns = [
         {
-            title: "Nome",
-            key: "name",
-            filterable: true,
-            
-            render: (record) => (
-                <Link href={`/requests/${record?.id}`}>
-                    <Space>
-                        <Avatar
-                            
-                            shape="square"
-                            icon={<IconMessage/>}
-                        />
-                        <span>{record?.name}</span>
-                    </Space>
-                </Link>
-            ),
+            title: "Messaggio",
+            key: "content",
+            dataIndex: "content",
         },
         {
-            title: "Tot eventi",
-            type: "number",
-            key: "total_events",
+            title: "Priorità",
+            key: "priority",
+            width: 70,
+            render: ({ priority }) => {
+                    const { label, color } = getPriority(priority);
+                    return <Tag color={color}>{label}</Tag>;
+                },
         },
         {
-            title: "Prezzi",
-            type: "number",
-            key: "price",
-        },
-        {
-            title: "Creato il",
+            title: "Data",
             key: "created_at",
             type: "datetime",
             align: "right",
+            width: 140,
             render: (record) => (
                 <span>{dateTimeFormatter(record?.created_at)}</span>
             ),
         },
         {
-            
             key: "actions",
             sorter: false,
             align: "right",
             fixed: "right",
             render: (record) => (
-                <Dropdown
-                    menu={{ items: tableActions }}
-                    placement="bottomRight"
-                    trigger={["click"]}
-                    onClick={() => setSelected(record)}
-                >
-                    <Button type="text" icon={<IconDots color="#222222" />} />
-                </Dropdown>
+                <Space.Compact>
+                    <Button icon={<IconDots size={22}/>} />
+                    <Button danger icon={<IconTrash size={22}/>} />
+                </Space.Compact>
             ),
         },
     ];
@@ -85,7 +64,7 @@ const Products = (props) => {
     const tableActions = [
         {
             key: 1,
-            icon: <IconPencilMinus/>,
+            icon: <IconPencilMinus />,
             label: "Modifica",
             onClick: () => router.visit(`/requests/${selected?.id}`),
         },
@@ -95,7 +74,7 @@ const Products = (props) => {
         {
             key: 2,
             danger: true,
-            icon: <IconTrash/>,
+            icon: <IconTrash />,
             label: "Elimina",
             // onClick: async () => {
             //   if (selected?.user_id) {
@@ -109,28 +88,26 @@ const Products = (props) => {
 
     return (
         <AppLayout
-            title={`Richieste (${meta?.total})`}
+            title={`Notifiche (${meta?.total})`}
             extra={
                 <Button
                     type="primary"
-                    icon={<IconPlus/>}
+                    icon={<IconChecklist />}
                     onClick={() => togglePopup()}
                 >
-                    Aggiungi
+                    Segna come lette
                 </Button>
             }
         >
-
             <Datatable
-                    columns={columns}
-                    data={data}
-                    meta={meta}
-                    processing={processing}
-                    initialFilters={filters}
-                />
-
+                columns={columns}
+                data={data}
+                meta={meta}
+                processing={processing}
+                initialFilters={filters}
+            />
         </AppLayout>
     );
 };
 
-export default Products;
+export default PageInbox;

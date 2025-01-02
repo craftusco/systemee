@@ -23,7 +23,7 @@ const Artists = (props) => {
             title: "Nome",
             key: "name",
             filterable: true,
-            sorter: (a, b) => a.name - b.name,
+            
             render: (record) => (
                 <Link href={`/artists/${record?.id}`}>
                     <Space>
@@ -39,11 +39,13 @@ const Artists = (props) => {
         {
             title: "Tot eventi",
             type: "number",
+            filterable: true,
             key: "total_events",
         },
         {
             title: "Prezzi",
-            type: "number",
+            type: "range",
+            filterable: true,
             key: "price",
         },
         {

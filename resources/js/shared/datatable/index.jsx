@@ -1,12 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { Table, Input, Button, Flex, Card } from "antd";
 import { router } from "@inertiajs/react";
-import FilterInput from "./filter-input";
 import {
     IconAdjustments,
-    IconChevronLeft,
-    IconChevronRight,
-    IconFilters,
 } from "@tabler/icons-react";
 import ModalFilters from "./filters/modal-filters";
 
@@ -54,18 +50,19 @@ const Datatable = ({
     );
 
     return (
-        <>
+        <Card className="p-0 datatable">
             {modalFilters && (
                 <ModalFilters
                     isOpened={modalFilters}
                     onClose={() => setModalFilters(!modalFilters)}
+                    columns={columns}
                 />
             )}
             {showFilters && (
                 <div className="flex justify-between items-center gap-4 mb-1">
                     <Input placeholder="Cerca qui" />
                     <Button
-                        icon={<IconAdjustments />}
+                        icon={<IconAdjustments/>}
                         onClick={() => setModalFilters(!modalFilters)}
                     >
                         Filtri
@@ -88,7 +85,7 @@ const Datatable = ({
                 onChange={handleTableChange}
                 {...props}
             />
-        </>
+        </Card>
     );
 };
 

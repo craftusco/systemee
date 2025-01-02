@@ -13,6 +13,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InboxController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
@@ -32,6 +33,7 @@ Route::middleware('guest')->group(function () {
 // User
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name(name: 'index');
+    Route::get('/inbox', [InboxController::class, 'index'])->name(name: 'inbox.index');
 
     // Artists
     Route::prefix('artists')->name('artists')->group(function () {

@@ -3,7 +3,7 @@ import { Button, message } from "antd";
 import AppLayout from "@/layouts/app-layout";
 import FormRole from "@/modules/settings/form-role";
 
-const RoleView = (props) => {
+const PageViewRole = (props) => {
     const { data, meta, filters, processing } = props;
     console.log("🌱 page.roles.view:", props);
 
@@ -29,4 +29,4 @@ const RoleView = (props) => {
     );
 };
 
-export default RoleView;
+export default PageViewRole;

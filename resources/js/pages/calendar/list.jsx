@@ -109,7 +109,7 @@ const PageList = (props) => {
                     </Button>
                 }
             >
-                <div className="data-content">
+               
                 <Datatable
                     columns={columns}
                     data={data}
@@ -117,7 +117,7 @@ const PageList = (props) => {
                     processing={processing}
                     initialFilters={filters}
                 />
-                </div>
+               
             </AppLayout>
         </>
     );

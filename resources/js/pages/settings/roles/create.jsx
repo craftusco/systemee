@@ -3,7 +3,7 @@ import { Button, message } from "antd";
 import AppLayout from "@/layouts/app-layout";
 import FormRole from "@/modules/settings/form-role";
 
-const RoleCreate = (props) => {
+const PageCreateRole = (props) => {
     const { data, meta, filters, processing } = props;
     console.log("🌱 page.roles.create:", props);
 
@@ -22,11 +22,11 @@ const RoleCreate = (props) => {
                 </Button>
             }
         >
-            <div className="data-content">
+            
                 <FormRole initialData={data} />
-            </div>
+            
         </AppLayout>
     );
 };
 
-export default RoleCreate;
+export default PageCreateRole;

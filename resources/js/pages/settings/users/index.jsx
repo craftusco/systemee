@@ -30,7 +30,7 @@ const Users = (props) => {
             title: "Nome",
             key: "name",
             filterable: true,
-            sorter: (a, b) => a.name - b.name,
+            
             render: (record) => (
                 <Link href={`/settings/users/${record?.id}`}>
                     <Space>

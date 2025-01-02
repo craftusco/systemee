@@ -13,8 +13,9 @@ import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
 import { handleDelete } from "@/lib/actions/delete-role";
+import { filter } from "lodash";
 
-const Roles = (props) => {
+const PageRoles = (props) => {
     const { page, processing } = props;
     const { data, meta, filters } = page;
     console.log("🌱 page.roles.index:", props);
@@ -25,7 +26,6 @@ const Roles = (props) => {
             title: "Nome",
             key: "name",
             filterable: true,
-            sorter: (a, b) => a.name - b.name,
             render: (record) => (
                 <Link href={`/settings/roles/${record?.id}`}>
                     <Space>
@@ -38,11 +38,13 @@ const Roles = (props) => {
         {
             title: "Descrizione",
             type: "text",
+            filterable: true,
             key: "total_events",
         },
         {
             title: "Creato il",
             key: "created_at",
+            filterable: true,
             type: "datetime",
             align: "right",
             render: (record) => (
@@ -117,4 +119,4 @@ const Roles = (props) => {
     );
 };
 
-export default Roles;
+export default PageRoles;

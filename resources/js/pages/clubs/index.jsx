@@ -129,7 +129,7 @@ const Clubs = (props) => {
                 </Button>
             }
         >
-            <div className="page-content">
+
                 <Datatable
                     columns={columns}
                     data={data}
@@ -137,7 +137,7 @@ const Clubs = (props) => {
                     processing={processing}
                     initialFilters={filters}
                 />
-            </div>
+
         </AppLayout>
     );
 };

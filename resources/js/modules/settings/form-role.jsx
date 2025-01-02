@@ -1,7 +1,28 @@
 "use client";
 import React, { useState } from "react";
-import { Checkbox, Col, Form, Row, Table, Input, ColorPicker, message } from "antd";
+import {
+    Checkbox,
+    Col,
+    Form,
+    Row,
+    Table,
+    Input,
+    ColorPicker,
+    message,
+    Card,
+    Divider,
+    Typography,
+    Space,
+} from "antd";
+const { Title } = Typography;
 import { useForm } from "@inertiajs/react";
+import {
+    IconPencilMinus,
+    IconTable,
+    IconTablePlus,
+    IconTrash,
+} from "@tabler/icons-react";
+import { getIcon } from "@/utils/icons";
 
 const FormRole = (props) => {
     const { initialData } = props;
@@ -32,11 +53,21 @@ const FormRole = (props) => {
     const columns = [
         {
             title: "Pagina",
-            dataIndex: "pageName",
             key: "pageName",
+            render: (record) => (
+                <Space>
+                    {getIcon(record?.key)}
+                    {record?.label}
+                </Space>
+            ),
         },
         {
-            title: "Creazione",
+            title: (
+                <Space>
+                    <IconTablePlus color="#28a745" size={20} />
+                    Creazione
+                </Space>
+            ),
             dataIndex: "permissions",
             key: "create",
             render: (_, record) => (
@@ -54,7 +85,12 @@ const FormRole = (props) => {
             ),
         },
         {
-            title: "Lettura",
+            title: (
+                <Space>
+                    <IconTable color="#007bff" size={20} />
+                    Lettura
+                </Space>
+            ),
             dataIndex: "permissions",
             key: "read",
             render: (_, record) => (
@@ -72,7 +108,12 @@ const FormRole = (props) => {
             ),
         },
         {
-            title: "Modifica",
+            title: (
+                <Space>
+                    <IconPencilMinus color="#ffc107" size={20} />
+                    Modifica
+                </Space>
+            ),
             dataIndex: "permissions",
             key: "update",
             render: (_, record) => (
@@ -90,7 +131,12 @@ const FormRole = (props) => {
             ),
         },
         {
-            title: "Eliminazione",
+            title: (
+                <Space>
+                    <IconTrash color="#dc3545" size={20} />
+                    Eliminazione
+                </Space>
+            ),
             dataIndex: "permissions",
             key: "delete",
             render: (_, record) => (
@@ -125,7 +171,7 @@ const FormRole = (props) => {
     };
 
     return (
-        <>
+        <Card>
             <Form
                 layout="vertical"
                 name="form-reminder"
@@ -152,20 +198,20 @@ const FormRole = (props) => {
                         <Form.Item
                             label="Colore"
                             name="color"
-                            initialValue="#1677ff"
                         >
-                            <ColorPicker showText/>
+                            <ColorPicker showText />
                         </Form.Item>
                     </Col>
                 </Row>
             </Form>
+            <Divider>Seleziona permessi</Divider>
             <Table
                 dataSource={initialData}
                 columns={columns}
                 pagination={false}
                 key="uuid"
             />
-        </>
+        </Card>
     );
 };
 

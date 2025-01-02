@@ -31,7 +31,7 @@ export default function AppLayout(props) {
         <SideNav />
       </Sider>
       <Layout style={{padding: '10px 0', marginLeft: 240}}>
-        <Content theme='light'>
+        <Content theme='light' style={{height: '100svh'}}>
           <div className="container">
             <PageActions {...props} />
               {children}

@@ -14,6 +14,7 @@ import {
     IconMessage2,
     IconAnalyze,
     IconSettings,
+    IconInbox,
 } from "@tabler/icons-react";
 
 import { Avatar, Divider, Menu, Dropdown, Tag } from "antd";
@@ -61,6 +62,11 @@ const SideNav = () => {
             key: "/",
             icon: <IconHome />,
             label: <Link href="/">Home</Link>,
+        },
+        {
+            key: "/inbox",
+            icon: <IconInbox />,
+            label: <Link href="/inbox">Notifiche</Link>,
         },
         {
             key: "/artists-group",

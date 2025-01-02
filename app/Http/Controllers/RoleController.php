@@ -23,7 +23,7 @@ class RoleController extends Controller
         $filters = $request->query();
         $data = QueryBuilder::for(Role::class)
             ->allowedFilters(['name'])
-            ->paginate($filters['page_size'] ?? 25)
+            ->paginate($filters['label_size'] ?? 25)
             ->appends(request()->query());
 
         return Inertia::render('settings/roles/index', [
@@ -35,7 +35,7 @@ class RoleController extends Controller
     {
         $permissions = [
             [
-                "pageName" => "Utenti",
+                "label" => "Utenti",
                 "permissions" => [
                     "create" => false,
                     "read" => true,
@@ -44,7 +44,7 @@ class RoleController extends Controller
                 ]
             ],
             [
-                "pageName" => "Club",
+                "label" => "Club",
                 "permissions" => [
                     "create" => false,
                     "read" => true,
@@ -53,7 +53,7 @@ class RoleController extends Controller
                 ]
             ],
             [
-                "pageName" => "Artisti",
+                "label" => "Artisti",
                 "permissions" => [
                     "create" => true,
                     "read" => true,
@@ -62,7 +62,7 @@ class RoleController extends Controller
                 ]
             ],
             [
-                "pageName" => "Richieste",
+                "label" => "Richieste",
                 "permissions" => [
                     "create" => false,
                     "read" => true,
@@ -92,7 +92,8 @@ class RoleController extends Controller
     {
         $permissions = [
             [
-                "pageName" => "Utenti",
+                "label" => "Utenti",
+                "key" => "users",
                 "permissions" => [
                     "create" => false,
                     "read" => true,
@@ -101,7 +102,8 @@ class RoleController extends Controller
                 ]
             ],
             [
-                "pageName" => "Club",
+                "label" => "Club",
+                "key" => "clubs",
                 "permissions" => [
                     "create" => false,
                     "read" => true,
@@ -110,7 +112,8 @@ class RoleController extends Controller
                 ]
             ],
             [
-                "pageName" => "Artisti",
+                "label" => "Artisti",
+                "key"=> "artists",
                 "permissions" => [
                     "create" => true,
                     "read" => true,
@@ -119,7 +122,8 @@ class RoleController extends Controller
                 ]
             ],
             [
-                "pageName" => "Richieste",
+                "label" => "Richieste",
+                "key"=> "inbox",
                 "permissions" => [
                     "create" => false,
                     "read" => true,
