@@ -26,6 +26,7 @@ export default function AppLayout(props) {
           left: 0,
           top: 0,
           bottom: 0,
+          borderRight: '1px solid rgb(0 0 0 / 15%)'
         }}
       >
         <SideNav />
