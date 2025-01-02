@@ -16,6 +16,7 @@ const { Text, Title } = Typography;
 const { Meta } = Card;
 import {
     IconDots,
+    IconPencilMinus,
     IconTrash,
 } from "@tabler/icons-react";
 import { useAtom } from "jotai";
@@ -56,6 +57,7 @@ const View = (props) => {
         {
           onClick: () => setModal(!modal),
           label: "Modifica",
+          icon: <IconPencilMinus />,
           onClick: () => router.visit(`/requests/${selected?.id}`),
         },
         {
@@ -81,7 +83,7 @@ const View = (props) => {
         <AppLayout 
                     backUrl="/artists"
                     title={`Artista - ${data?.name}`}
-                    subTitle={`Club - ${data?.supplier?.name}`}
+                    subTitle={`Club - ${data?.created_at}`}
                     extra={
                         <Space>
                           <Dropdown
@@ -89,7 +91,7 @@ const View = (props) => {
                             placement="bottomRight"
                             trigger={["click"]}
                           >
-                            <Button icon={<IconDots />}>
+                            <Button type="text" icon={<IconDots />}>
                               Altro
                             </Button>
                           </Dropdown>
@@ -99,7 +101,7 @@ const View = (props) => {
                 <div className="page-content">
                     <Row gutter={[16, 16]}>
                         <Col span={12}>
-                            <Card title="Dettagli prodotto">
+                            <Card title="Dettagli">
                                 <List
                                     dataSource={productInfo}
                                     renderItem={(item) => (

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, Button, Divider, Dropdown, Space } from "antd";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import {
     IconDots,
     IconPencilMinus,
     IconTrash,
     IconPlus,
+    IconEye,
 } from "@tabler/icons-react";
 import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
@@ -80,6 +81,12 @@ const Artists = (props) => {
     const tableActions = [
         {
             key: 1,
+            icon: <IconEye />,
+            label: "Dettagli",
+            onClick: () => router.visit(`/artists/${selected?.id}`),
+        },
+        {
+            key: 2,
             icon: <IconPencilMinus />,
             label: "Modifica",
             onClick: () => router.visit(`/artists/${selected?.id}`),
@@ -88,7 +95,7 @@ const Artists = (props) => {
             type: "divider",
         },
         {
-            key: 2,
+            key: 3,
             danger: true,
             icon: <IconTrash />,
             label: "Elimina",

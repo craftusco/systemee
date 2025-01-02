@@ -1,29 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { Avatar, Button, ColorPicker, Divider, Dropdown, Space, Tag } from "antd";
-import { Link, usePage } from "@inertiajs/react";
-
+import React, { useState } from "react";
+import { Button, Dropdown, Tag } from "antd";
 import {
-    IconAlertCircle,
-    IconCloudUpload,
-    IconUserFilled,
     IconDots,
-    IconEye,
-    IconTrash, IconPencilMinus, IconPlus
+    IconTrash,
+    IconPencilMinus,
+    IconPlus,
 } from "@tabler/icons-react";
-import { dateTimeFormatter } from "@/helpers/formatter";
 import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
+import ModalEventType from "@/modules/settings/modal-event-type";
 
-const PageEventTypes = (props) => {
-    const { page, processing } = props;
+const PageEventTypes = ({ page, processing }) => {
     const { data, meta, filters } = page;
-    console.log("🌱 page.event-types.index:", props);
-    const [selected, setSelected] = useState([]);
-    // Toggle popup
+    const [selected, setSelected] = useState(null);
+    const [popupCreate, setPopup] = useState(false);
+
     const togglePopup = (record = null) => {
         setSelected(record);
-        setIsOpen(!isOpen);
+        setPopup((prev) => !prev);
     };
+
+    const tableActions = [
+        {
+            key: 1,
+            icon: <IconPencilMinus />,
+            label: "Modifica",
+            onClick: () => togglePopup(selected),
+        },
+        {
+            type: "divider",
+        },
+        {
+            key: 2,
+            danger: true,
+            icon: <IconTrash />,
+            label: "Elimina",
+            onClick: () => selected?.user_id && handleDelete(selected.user_id),
+        },
+    ];
 
     const columns = [
         {
@@ -32,19 +46,18 @@ const PageEventTypes = (props) => {
             dataIndex: "title",
         },
         {
-            title: "Colore",
-            type: "color",
-            key: "color",
-            render: ({color}) => (
-                <Tag color={color}>{color}</Tag>
-            ),
+            title: "Descrizione",
+            key: "description",
+            dataIndex: "description",
         },
         {
-            
+            title: "Colore",
+            key: "color",
+            render: ({ color }) => <Tag color={color}>{color}</Tag>,
+        },
+        {
             key: "actions",
-            sorter: false,
             align: "right",
-            fixed: "right",
             render: (record) => (
                 <Dropdown
                     menu={{ items: tableActions }}
@@ -58,55 +71,37 @@ const PageEventTypes = (props) => {
         },
     ];
 
-    const tableActions = [
-        {
-            key: 1,
-            icon: <IconPencilMinus/>,
-            label: "Modifica",
-            onClick: () => togglePopup(),
-        },
-        {
-            type: "divider",
-        },
-        {
-            key: 2,
-            danger: true,
-            icon: <IconTrash/>,
-            label: "Elimina",
-            // onClick: async () => {
-            //   if (selected?.user_id) {
-            //     handleDelete(selected?.user_id);
-            //   } else {
-            //     console.error('documentId is undefined');
-            //   }
-            // },
-        },
-    ];
-
     return (
-        <AppLayout
-            title={`Tipologie eventi`}
-            extra={
-                <Button
-                    type="primary"
-                    icon={<IconPlus/>}
-                    onClick={() => togglePopup()}
-                >
-                    Aggiungi
-                </Button>
-            }
-        >
-            <div className="data-content">
-                <Datatable
-                    columns={columns}
-                    data={data}
-                    meta={meta}
-                    processing={processing}
-                    initialFilters={filters}
-                    showFilters={false}
-                />
-            </div>
-        </AppLayout>
+        <>
+            <ModalEventType
+                isOpened={popupCreate}
+                onClose={() => togglePopup()}
+                initialData={selected}
+            />
+            <AppLayout
+                title="Tipologie eventi"
+                extra={
+                    <Button
+                        type="primary"
+                        icon={<IconPlus />}
+                        onClick={() => togglePopup()}
+                    >
+                        Aggiungi
+                    </Button>
+                }
+            >
+                <div className="data-content">
+                    <Datatable
+                        columns={columns}
+                        data={data}
+                        meta={meta}
+                        processing={processing}
+                        initialFilters={filters}
+                        showFilters={false}
+                    />
+                </div>
+            </AppLayout>
+        </>
     );
 };
 

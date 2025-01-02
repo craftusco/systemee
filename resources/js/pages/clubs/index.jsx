@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button, Divider, Space, Table } from "antd";
+import { Avatar, Button, Divider, Dropdown, Space, Table } from "antd";
 
 import { Link } from "@inertiajs/react";
 import { dateTimeFormatter } from "@/helpers/formatter";
-import { IconEye, IconPlus } from "@tabler/icons-react";
+import {
+    IconDots,
+    IconPencilMinus,
+    IconTrash,
+    IconPlus,
+    IconEye,
+} from "@tabler/icons-react";
 import Datatable from "@/shared/datatable";
 import AppLayout from "@/layouts/app-layout";
-
 
 const Clubs = (props) => {
     const { page, processing } = props;
@@ -24,7 +29,6 @@ const Clubs = (props) => {
                 <Link href={`/clubs/${record?.id}`}>
                     <Space>
                         <Avatar
-                            
                             shape="square"
                             src={record?.iamge || "/images/placeholder.svg"}
                         />
@@ -37,6 +41,16 @@ const Clubs = (props) => {
             title: "Descrizione",
             key: "description",
             dataIndex: "description",
+        },
+        {
+            title: "Email",
+            key: "email",
+            dataIndex: "email",
+        },
+        {
+            title: "Telefono",
+            key: "phone",
+            dataIndex: "phone",
         },
         {
             title: "Website",
@@ -56,16 +70,49 @@ const Clubs = (props) => {
             sortable: true,
         },
         {
-            
             key: "actions",
             align: "right",
             render: (record) => (
-                <Space.Compact>
-                    <Link href={`/clubs/${record?.id}`}>
-                        <Button icon={<IconEye />}>Vedi</Button>
-                    </Link>
-                </Space.Compact>
+                <Dropdown
+                    menu={{ items: tableActions }}
+                    placement="bottomRight"
+                    trigger={["click"]}
+                    onClick={() => setSelected(record)}
+                >
+                    <Button type="text" icon={<IconDots color="#222222" />} />
+                </Dropdown>
             ),
+        },
+    ];
+
+    const tableActions = [
+        {
+            key: 1,
+            icon: <IconEye />,
+            label: "Dettagli",
+            onClick: () => router.visit(`/artists/${selected?.id}`),
+        },
+        {
+            key: 2,
+            icon: <IconPencilMinus />,
+            label: "Modifica",
+            onClick: () => router.visit(`/artists/${selected?.id}`),
+        },
+        {
+            type: "divider",
+        },
+        {
+            key: 3,
+            danger: true,
+            icon: <IconTrash />,
+            label: "Elimina",
+            // onClick: async () => {
+            //   if (selected?.user_id) {
+            //     handleDelete(selected?.user_id);
+            //   } else {
+            //     console.error('documentId is undefined');
+            //   }
+            // },
         },
     ];
 

@@ -16,20 +16,14 @@ const { Text, Title } = Typography;
 const { Meta } = Card;
 
 import {
-    IconCompass,
-    Icon123,
-    IconActivity,
-    IconUserCircle,
-    IconMoneybag,
-    IconUpload,
-    IconCloudUpload,
-    IconClock,
     IconDots,
+    IconPencilMinus,
     IconTrash,
 } from "@tabler/icons-react";
 import { useAtom } from "jotai";
-import FormBody from "@/shared/artists/form-body";
+import FormBody from "@/modules/artists/form-body";
 import AppLayout from "@/layouts/app-layout";
+import { dateFormatter } from "@/helpers/formatter";
 
 const View = (props) => {
     const { data, processing } = props;
@@ -46,6 +40,7 @@ const View = (props) => {
     const tableActions = [
         {
             onClick: () => setModal(!modal),
+            icon: <IconPencilMinus />,
             label: "Modifica",
         },
         {
@@ -71,7 +66,7 @@ const View = (props) => {
         <AppLayout
             backUrl="/artists"
             title={`Artista - ${data?.name}`}
-            subTitle={`Club - ${data?.supplier?.name}`}
+            subTitle={`Creato il - ${dateFormatter(data?.created_at)}`}
             extra={
                 <Space>
                     <Dropdown
@@ -79,7 +74,7 @@ const View = (props) => {
                         placement="bottomRight"
                         trigger={["click"]}
                     >
-                        <Button icon={<IconDots />}>
+                        <Button icon={<IconDots />} type="text">
                             Altro
                         </Button>
                     </Dropdown>
@@ -89,17 +84,7 @@ const View = (props) => {
             <div className="page-content">
                 <Row gutter={[16, 16]}>
                     <Col span={12}>
-                        <Card title="Dettagli prodotto">
-                            <List
-                                dataSource={productInfo}
-                                renderItem={(item) => (
-                                    <List.Item>
-                                        <Text strong>{item.label}:</Text>{" "}
-                                        <Text>{item.value}</Text>
-                                    </List.Item>
-                                )}
-                            />
-                        </Card>
+                        <FormBody initialData={data} processing={processing} />
                     </Col>
                     <Col span={12}>
                        

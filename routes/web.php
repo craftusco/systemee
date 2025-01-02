@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AnalyticsController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 // Auth
 use App\Http\Controllers\Auth\LoginController;

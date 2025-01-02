@@ -12,7 +12,7 @@ export const settingLinks = [
       },
       {
         label: "Ruoli",
-        description: "Gestisci i ruoli",
+        description: "Gestisci ruoli e permessi",
         icon: <IconLockAccess/>,
         url: "/settings/roles",
       },
@@ -25,17 +25,6 @@ export const settingLinks = [
         description: "Modifica le tipologie di eventi",
         icon: <IconTicket/>,
         url: "/settings/event-types",
-      }
-    ],
-  },
-  {
-      title: "Altro",
-      items: [
-      {
-        label: "Activity viewer",
-        description: "Activity reports overview",
-        icon: <Icon123/>,
-        url: "/settings/activity",
       }
     ],
   }
