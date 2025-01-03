@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Calendar } from "antd";
+import { Button, Calendar, Card } from "antd";
 import AppLayout from "@/layouts/app-layout";
 import { IconPlus } from "@tabler/icons-react";
 
@@ -24,7 +24,9 @@ const PageCalendar = (props) => {
             </Button>
         }
     >
+        <Card>
             <Calendar />
+            </Card>
         </AppLayout>
     );
 };
