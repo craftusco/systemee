@@ -2,7 +2,7 @@
   "theme": "light",
   "wirefreame": true, 
   "token": {
-    "fontFamily": "'Inter', sans-serif",
+    "fontFamily": "Inter, sans-serif",
     "letterSpacing": 0.5,
     "colorPrimary": "#1677ff",    
     "colorSuccess": "#34C759",     

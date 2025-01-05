@@ -15,12 +15,15 @@ import {
     IconAnalyze,
     IconSettings,
     IconInbox,
+    IconLayoutSidebarRightExpand,
+    IconLayoutSidebarLeftExpand
 } from "@tabler/icons-react";
 
-import { Avatar, Divider, Menu, Dropdown, Tag } from "antd";
+import { Avatar, Divider, Menu, Dropdown, Tag, Button } from "antd";
 import confirm from "../components/confirm";
 
-const SideNav = () => {
+const SideNav = (props) => {
+    const { onCollapse, collapsed } = props;
     const defaultSelected = usePage().url.split("?")[0];
     const { isLoggedIn, user } = usePage().props.auth;
 
@@ -126,7 +129,10 @@ const SideNav = () => {
 
     return (
         <aside className="h-full">
-            <div className="p-2 text-center text-white">Logo</div>
+            <div className="flex items-center justify-between p-2">
+            {collapsed ? null : <div className="p-2 text-center">LOGO</div>}
+            <Button icon={collapsed ? <IconLayoutSidebarLeftExpand color="#555"/> : <IconLayoutSidebarRightExpand color="#555"/>} type="text" onClick={onCollapse}/>
+            </div>
             <Divider />
             <Menu
                 mode="inline"

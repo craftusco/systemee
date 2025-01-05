@@ -1,9 +1,9 @@
 "use client";
-import { Button, Flex } from "antd";
+import {  Flex, Typography } from "antd";
+const { Title } = Typography;
 import React from "react";
 import { useDevice } from "@/utils/breakpoints";
-import { IconChevronLeft } from "@tabler/icons-react";
-import { Link } from "@inertiajs/react";
+
 
 const AuthLayout = (props) => {
   const { children, title, subtitle, backLink } = props;
@@ -18,9 +18,9 @@ const AuthLayout = (props) => {
               Systemee
             </div>
             <div className="w-full mb-4">
-              <h1 className="text-3xl font-bold tracking-tight text-center text-[#002B20]">
+              <Title level={3} className="text-center">
                 {title}
-              </h1>
+              </Title>
               <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
                 {subtitle}
               </p>
